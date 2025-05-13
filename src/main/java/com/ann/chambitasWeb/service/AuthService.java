@@ -23,7 +23,8 @@ public class AuthService {
     public AuthService(
             UsuarioService usuarioService,
             VerificacionCorreoService verificacionCorreoService,
-            EmailService emailService) {
+            EmailService emailService
+            ) {
         this.usuarioService = usuarioService;
         this.verificacionCorreoService = verificacionCorreoService;
         this.emailService = emailService;
@@ -76,5 +77,6 @@ public class AuthService {
         verificacionCorreoService.marcarComoVerificado(verificacion);
         usuarioService.activarUsuario(verificacion.getUsuario().getCorreo());
     }
+
 }
 

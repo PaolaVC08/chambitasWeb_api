@@ -16,29 +16,30 @@ public class UsuarioDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
   private Long id;
-
   private String correo;
-
+  private String nombre;
   @JsonIgnore
   private String password;
-
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UsuarioDetailsImpl(Long id, String correo, String password,
+  public UsuarioDetailsImpl(Long id, String nombre,String correo, String password,
                             Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.correo = correo;
     this.password = password;
     this.authorities = authorities;
+    this.nombre= nombre;
   }
 
   public static UsuarioDetailsImpl build(Usuario usuario) {
+    String nombre = usuario.getNombre() + " " + usuario.getApellidoPaterno() + " " + usuario.getApellidoMaterno();
     List<GrantedAuthority> authorities = usuario.getRoles().stream()
         .map(rol -> new SimpleGrantedAuthority(rol.getNombre().name()))
         .collect(Collectors.toList());
 
     return new UsuarioDetailsImpl(
         usuario.getId(),
+        nombre,
         usuario.getCorreo(),
         usuario.getPassword(),
         authorities);
@@ -46,6 +47,10 @@ public class UsuarioDetailsImpl implements UserDetails {
 
   public Long getId() {
     return id;
+  }
+
+  public String getNombre() {
+    return nombre;
   }
 
   public String getCorreo() {

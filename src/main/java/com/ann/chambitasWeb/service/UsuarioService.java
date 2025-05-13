@@ -32,7 +32,7 @@ public class UsuarioService {
     }
 
     /**
-     * Verifica si ya existe un correo en la base de datos.
+     * Verifica si ya existe el correo en la base de datos.
      */
     public boolean existeCorreo(String correo) {
         return usuarioRepository.existsByCorreo(correo);

@@ -9,3 +9,4 @@ public class ValidationServiceException  extends RuntimeException{
             super(message);
         }
 }
+

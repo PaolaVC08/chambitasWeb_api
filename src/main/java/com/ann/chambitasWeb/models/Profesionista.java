@@ -3,46 +3,47 @@ package com.ann.chambitasWeb.models;
 import java.util.List;
 
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "profesionistas")
 public class Profesionista {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProf;
+    @Column(name = "id_prof")
+    private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "usuario_id", unique = true)
+    @OneToOne(optional = false)
+    @JoinColumn(name = "usuario_id", unique = true, nullable = false)
     private Usuario usuario;
 
     @Column(columnDefinition = "TEXT")
     private String biografia;
 
- //   private String horarioAtencion;
+    @Column(name = "horario_atencion")
+    private String horarioAtencion;
 
-    @ManyToOne
-    @JoinColumn(name = "zona_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "zona_id", nullable = false)
     private Zona zona;
 
-    //private int numeroLikes;
+    @Column(name = "numero_likes")
+    private Integer numeroLikes = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "profesionista")
+    @OneToMany(mappedBy = "profesionista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Certificado> certificados;
 
-    @OneToMany(mappedBy = "profesionista")
+    @OneToMany(mappedBy = "profesionista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Education> educacion;
 
-    @OneToMany(mappedBy = "profesionista")
+    @OneToMany(mappedBy = "profesionista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProfesionistaProfesion> profesiones;
 
-    @OneToMany(mappedBy = "profesionista")
+    @OneToMany(mappedBy = "profesionista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedioContacto> contactos;
 
-    // Getters, setters
+    // Getters, setters, equals, hashCode, etc.
 }
-

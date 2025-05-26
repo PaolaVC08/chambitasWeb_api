@@ -60,12 +60,8 @@ public class Usuario {
   @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id_rol"))
   private Set<Rol> roles = new HashSet<>();
 
-
-
   public Usuario() {
-  }
-
-  
+    }
 
     public Usuario(String nombre, @NotBlank @Size(max = 20) String apellidoPaterno,
         @NotBlank @Size(max = 20) String apellidoMaterno, @NotBlank @Size(max = 20) LocalDate fechaNacimiento,

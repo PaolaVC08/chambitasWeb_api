@@ -1,8 +1,8 @@
 package com.ann.chambitasWeb.models;
-//import java.math.BigDecimal;
-import java.util.List;
 
 import jakarta.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "servicios")
 public class Servicio {
@@ -15,14 +15,66 @@ public class Servicio {
     @JoinColumn(name = "profesionista_profesion_id")
     private ProfesionistaProfesion profesionistaProfesion;
 
-    //private String titulo;
+    @Column(nullable = false)
+    private String nombre;  // para el título o nombre del servicio
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-  //  private BigDecimal precio;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;  // relación con categoría
 
     @OneToMany(mappedBy = "servicio")
     private List<ImagenServicio> imagenes;
-}
 
+    // Getters y setters
+
+    public Long getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(Long idServicio) {
+        this.idServicio = idServicio;
+    }
+
+    public ProfesionistaProfesion getProfesionistaProfesion() {
+        return profesionistaProfesion;
+    }
+
+    public void setProfesionistaProfesion(ProfesionistaProfesion profesionistaProfesion) {
+        this.profesionistaProfesion = profesionistaProfesion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<ImagenServicio> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<ImagenServicio> imagenes) {
+        this.imagenes = imagenes;
+    }
+}

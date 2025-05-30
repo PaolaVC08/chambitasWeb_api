@@ -1,5 +1,6 @@
 package com.ann.chambitasWeb.service;
 
+import com.ann.chambitasWeb.dtos.request.SignupProfesionistaRequest;
 import com.ann.chambitasWeb.dtos.request.SignupRequest;
 import com.ann.chambitasWeb.models.Usuario;
 import com.ann.chambitasWeb.models.VerificacionCorreo;
@@ -28,6 +29,30 @@ public class AuthService {
         this.verificacionCorreoService = verificacionCorreoService;
         this.emailService = emailService;
     }
+
+
+//Regitrar un nuevo usuario profesionista inactivo y envía correo. 
+public void registrarProfesionista(SignupProfesionistaRequest request) {
+    if (usuarioService.existeCorreo(request.getCorreo())) {
+        throw new ValidationServiceException("El correo ya está registrado.");
+    }
+
+    Usuario nuevoUsuario = usuarioService.crearUsuarioProfesionista(request);
+
+    String token = UUID.randomUUID().toString();
+    LocalDateTime ahora = LocalDateTime.now();
+    LocalDateTime expiracion = ahora.plusMinutes(30);
+
+    verificacionCorreoService.guardarRegistroVerificacion(
+        nuevoUsuario, token, ahora, expiracion
+    );
+
+    emailService.enviarCorreoVerificacion(
+        nuevoUsuario.getCorreo(), nuevoUsuario.getNombre(), token
+    );
+}
+
+
 
     /**
      * Registra un nuevo usuario en estado inactivo y envía correo de verificación

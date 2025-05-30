@@ -1,10 +1,13 @@
 package com.ann.chambitasWeb.service;
 
 
+import com.ann.chambitasWeb.dtos.request.SignupProfesionistaRequest;
 import com.ann.chambitasWeb.dtos.request.SignupRequest;
 import com.ann.chambitasWeb.models.Usuario;
 import com.ann.chambitasWeb.models.ERole;
 import com.ann.chambitasWeb.models.EstadoUsuario;
+import com.ann.chambitasWeb.models.MedioContacto;
+import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.models.Rol;
 import com.ann.chambitasWeb.repository.RoleRepository;
 import com.ann.chambitasWeb.repository.UsuarioRepository;
@@ -66,4 +69,42 @@ public class UsuarioService {
         usuario.setEstado(EstadoUsuario.ACTIVO);
         usuarioRepository.save(usuario);
     }
+
+    //Método para crear usuario profesionista. 
+    public Usuario crearUsuarioProfesionista(SignupProfesionistaRequest request) {
+    Usuario usuario = new Usuario();
+    usuario.setNombre(request.getNombre());
+    usuario.setApellidoPaterno(request.getApPaterno());
+    usuario.setApellidoMaterno(request.getApMaterno());
+    usuario.setFechaNacimiento(request.getFechaNacimiento());
+    usuario.setCorreo(request.getCorreo());
+    usuario.setPassword(passwordEncoder.encode(request.getPassword()));
+    usuario.setEstado(EstadoUsuario.INACTIVO);
+
+    Rol rol = roleRepository.findByNombre(ERole.ROLE_PRO)
+            .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+    usuario.setRoles(Set.of(rol));
+    Usuario usuarioGuardado = usuarioRepository.save(usuario);
+
+    // Guardar datos extra del profesionista
+    Profesionista prof = new Profesionista();
+    prof.setUsuario(usuarioGuardado);
+    prof.setZona(zonaRepository.findById(request.getZonaId()).orElseThrow());
+    prof.setCategoria(categoriaRepository.findById(request.getCategoriaId()).orElseThrow());
+    prof.setBiografia(request.getBiografia());
+    prof.setHorarioAtencion("Por definir");
+    prof.setNumeroLikes(0);
+
+    // Guardar medio de contacto
+    MedioContacto contacto = new MedioContacto();
+    contacto.profesionista(request.getNumeroContacto());
+    contacto.setValor(request.getNumeroContacto());
+    contacto.setTipo(tipoContactoRepository.findByNombre("Teléfono").orElseThrow());
+
+    // Guardar profesionista y contacto
+    profesionistaRepository.save(prof);
+    medioContactoRepository.save(contacto);
+
+    return usuarioGuardado;
+}
 }

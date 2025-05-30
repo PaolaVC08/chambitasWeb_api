@@ -16,6 +16,7 @@ public class MedioContacto {
     @JoinColumn(name = "tipo_contacto_id")
     private TipoContacto tipo;
 
+
     //private String valor;
 }
 

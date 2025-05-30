@@ -3,7 +3,7 @@ package com.ann.chambitasWeb.dtos.request;
 import java.time.LocalDate;
 import jakarta.validation.constraints.*;
 
-public class SignupRequest {
+public abstract class SignupRequest {
   @NotBlank
   @Size(min = 3, max = 20)
   private String nombre;

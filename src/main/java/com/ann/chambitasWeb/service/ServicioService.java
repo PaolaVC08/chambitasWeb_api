@@ -2,7 +2,7 @@ package com.ann.chambitasWeb.service;
 
 import com.ann.chambitasWeb.models.Servicio;
 import com.ann.chambitasWeb.models.Categoria;
-import com.ann.chambitasWeb.repository.ServiceRepository;
+import com.ann.chambitasWeb.repository.ServicioRepository;
 import com.ann.chambitasWeb.repository.CategoriaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ServiceService {
+public class ServicioService {
 
-    private final ServiceRepository serviceRepository;
+    private final ServicioRepository serviceRepository;
     private final CategoriaRepository categoriaRepository;
 
     @Autowired
-    public ServiceService(ServiceRepository servicioRepository, CategoriaRepository categoriaRepository) {
+    public ServicioService(ServicioRepository servicioRepository, CategoriaRepository categoriaRepository) {
         this.serviceRepository = servicioRepository;
         this.categoriaRepository = categoriaRepository;
     }

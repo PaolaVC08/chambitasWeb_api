@@ -3,7 +3,7 @@ package com.ann.chambitasWeb.dtos.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class SignupProfesionistaRequest extends SignupRequest {
+public class SignupProfesionistaRequest extends BaseSignupRequest {
     
 
   @NotNull
@@ -48,8 +48,5 @@ public class SignupProfesionistaRequest extends SignupRequest {
   public void setBiografia(String biografia) {
     this.biografia = biografia;
   }
-
-  // Getters y setters
-
   
 }

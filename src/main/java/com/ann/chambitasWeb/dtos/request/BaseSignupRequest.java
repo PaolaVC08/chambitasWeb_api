@@ -3,7 +3,7 @@ package com.ann.chambitasWeb.dtos.request;
 import java.time.LocalDate;
 import jakarta.validation.constraints.*;
 
-public class SignupRequest {
+public class BaseSignupRequest {
   @NotBlank
   @Size(min = 3, max = 20)
   private String nombre;
@@ -23,9 +23,6 @@ public class SignupRequest {
   @Size(min=6,max = 40)
   @Email
   private String correo;
-
-  @NotBlank
-  private String tipoUsuario;//cliente, profesional
 
   @NotBlank
   @Size(min = 5, max = 50)
@@ -72,15 +69,7 @@ public class SignupRequest {
   public void setCorreo(String correo) {
     this.correo = correo;
   }
-
-  public String getTipoUsuario() {
-    return tipoUsuario;
-  }
-
-  public void setTipoUsuario(String tipoUsuario) {
-    this.tipoUsuario = tipoUsuario;
-  }
-
+  
   public String getPassword() {
     return password;
   }

@@ -1,6 +1,10 @@
 package com.ann.chambitasWeb.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "historial_likes")
@@ -10,16 +14,17 @@ public class HistorialLike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHistorial;
 
-    @ManyToOne
-    @JoinColumn(name = "uEmisor_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "uEmisor_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario emisor;
 
-    @ManyToOne
-    @JoinColumn(name = "uReceptor_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "uReceptor_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario receptor;
 
-    // Puedes descomentar y usar estas para saber cuándo fue y estado del like
-    // private LocalDateTime fechaLike;
+    private LocalDateTime fechaLike;
     // private Boolean status;
 
     // Getters y setters
@@ -47,4 +52,20 @@ public class HistorialLike {
     public void setReceptor(Usuario receptor) {
         this.receptor = receptor;
     }
+
+    public LocalDateTime getFechaLike() {
+        return fechaLike;
+    }
+
+    public void setFechaLike(LocalDateTime fechaLike) {
+        this.fechaLike = fechaLike;
+    }
+
+    // public Boolean getStatus() {
+    // return status;
+    // }
+
+    // public void setStatus(Boolean status) {
+    // this.status = status;
+    // }
 }

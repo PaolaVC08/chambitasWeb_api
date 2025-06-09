@@ -9,8 +9,8 @@ public class SignupProfesionistaRequest extends BaseSignupRequest {
   @NotNull
   private Long zonaId;
 
-  @NotNull
-  private Long categoriaId;
+  //@NotNull
+  //private Long categoriaId;
 
   @NotBlank
   private String numeroContacto;
@@ -25,13 +25,13 @@ public class SignupProfesionistaRequest extends BaseSignupRequest {
     this.zonaId = zonaId;
   }
 
-  public Long getCategoriaId() {
-    return categoriaId;
-  }
+  //public Long getCategoriaId() {
+    //return categoriaId;
+  //}
 
-  public void setCategoriaId(Long categoriaId) {
-    this.categoriaId = categoriaId;
-  }
+  //public void setCategoriaId(Long categoriaId) {
+    //this.categoriaId = categoriaId;
+  //}
 
   public String getNumeroContacto() {
     return numeroContacto;

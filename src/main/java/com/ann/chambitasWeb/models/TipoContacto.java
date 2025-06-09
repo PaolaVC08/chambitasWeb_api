@@ -8,6 +8,24 @@ public class TipoContacto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTcontacto;
 
- //   private String nombre;
+    @Column(nullable = false, unique = true)
+    private String nombre;
+
+    // Getters y setters
+    public Long getIdTcontacto() {
+        return idTcontacto;
+    }
+
+    public void setIdTcontacto(Long idTcontacto) {
+        this.idTcontacto = idTcontacto;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
 

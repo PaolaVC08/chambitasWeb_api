@@ -1,5 +1,6 @@
 package com.ann.chambitasWeb.service;
 
+import com.ann.chambitasWeb.dtos.request.SignupProfesionistaRequest;
 import com.ann.chambitasWeb.dtos.request.SignupRequest;
 import com.ann.chambitasWeb.models.Usuario;
 import com.ann.chambitasWeb.models.VerificacionCorreo;
@@ -18,49 +19,75 @@ public class AuthService {
     private final UsuarioService usuarioService;
     private final VerificacionCorreoService verificacionCorreoService;
     private final EmailService emailService;
+    private final ProfesionistaService profesionistaService;
 
     @Autowired
     public AuthService(
             UsuarioService usuarioService,
             VerificacionCorreoService verificacionCorreoService,
-            EmailService emailService) {
+            EmailService emailService,
+            ProfesionistaService profesionistaService) {
         this.usuarioService = usuarioService;
         this.verificacionCorreoService = verificacionCorreoService;
         this.emailService = emailService;
+        this.profesionistaService = profesionistaService;
     }
 
     /**
-     * Registra un nuevo usuario en estado inactivo y envía correo de verificación
+     * Registra un nuevo usuario cliente
      */
     public void registrarUsuario(SignupRequest request) {
         if (usuarioService.existeCorreo(request.getCorreo())) {
             throw new ValidationServiceException("El correo ya está registrado.");
         }
 
-        // 1. Crear el usuario con estado INACTIVO
         Usuario nuevoUsuario = usuarioService.crearUsuarioInactivo(request);
 
-        // 2. Generar token y guardar registro de verificación
+        generarTokenYEnviarCorreo(nuevoUsuario);
+    }
+
+    /**
+     * Registra un nuevo usuario profesionista
+     */
+    public void registrarUsuarioProfesional(SignupProfesionistaRequest request) {
+        if (usuarioService.existeCorreo(request.getCorreo())) {
+            throw new ValidationServiceException("El correo ya está registrado.");
+        }
+
+        // 1. Crear el usuario con rol PROFESIONISTA
+        Usuario nuevoUsuario = profesionistaService.crearUsuarioProfesionista(request);
+
+        // 2. Guardar datos adicionales del profesionista (zona, categoría, contacto, etc.)
+        profesionistaService.guardarDatosProfesionista(request, nuevoUsuario);
+
+        // 3. Enviar verificación
+        generarTokenYEnviarCorreo(nuevoUsuario);
+    }
+
+    /**
+     * Reutilizable para ambos tipos de usuario
+     */
+    private void generarTokenYEnviarCorreo(Usuario nuevoUsuario) {
         String token = UUID.randomUUID().toString();
         LocalDateTime ahora = LocalDateTime.now();
         LocalDateTime expiracion = ahora.plusMinutes(30);
 
         verificacionCorreoService.guardarRegistroVerificacion(
-            nuevoUsuario,
-            token,
-            ahora,
-            expiracion
-        );
+                nuevoUsuario,
+                token,
+                ahora,
+                expiracion);
 
-        // 3.Enviar correo
         emailService.enviarCorreoVerificacion(
-            nuevoUsuario.getCorreo(),
-            nuevoUsuario.getNombre(),
-            token // este token se usará internamente para armar el link
+                nuevoUsuario.getCorreo(),
+                nuevoUsuario.getNombre(),
+                token
         );
-    }   
-    
-    // Verifica el token recibido desde el enlace del correo
+    }
+
+    /**
+     * Verifica el token del correo
+     */
     public void verificarCorreo(String token) {
         VerificacionCorreo verificacion = verificacionCorreoService.buscarPorToken(token);
 
@@ -77,4 +104,3 @@ public class AuthService {
         usuarioService.activarUsuario(verificacion.getUsuario().getCorreo());
     }
 }
-

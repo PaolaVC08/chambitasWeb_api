@@ -1,7 +1,7 @@
 package com.ann.chambitasWeb.models;
-//import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "historial_likes")
 public class HistorialLike {
@@ -18,7 +18,33 @@ public class HistorialLike {
     @JoinColumn(name = "uReceptor_id")
     private Usuario receptor;
 
- //   private LocalDateTime fechaLike;
- //   private Boolean status;
-}
+    // Puedes descomentar y usar estas para saber cuándo fue y estado del like
+    // private LocalDateTime fechaLike;
+    // private Boolean status;
 
+    // Getters y setters
+
+    public Long getIdHistorial() {
+        return idHistorial;
+    }
+
+    public void setIdHistorial(Long idHistorial) {
+        this.idHistorial = idHistorial;
+    }
+
+    public Usuario getEmisor() {
+        return emisor;
+    }
+
+    public void setEmisor(Usuario emisor) {
+        this.emisor = emisor;
+    }
+
+    public Usuario getReceptor() {
+        return receptor;
+    }
+
+    public void setReceptor(Usuario receptor) {
+        this.receptor = receptor;
+    }
+}

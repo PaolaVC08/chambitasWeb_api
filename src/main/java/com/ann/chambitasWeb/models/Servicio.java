@@ -2,6 +2,8 @@ package com.ann.chambitasWeb.models;
 
 import jakarta.persistence.*;
 import java.util.List;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "servicios")
@@ -11,21 +13,22 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idServicio;
 
-    @ManyToOne
-    @JoinColumn(name = "profesionista_profesion_id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "profesionista_profesion_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ProfesionistaProfesion profesionistaProfesion;
 
     @Column(nullable = false)
-    private String nombre;  // para el título o nombre del servicio
+    private String nombre;
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;  // relación con categoría
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
-    @OneToMany(mappedBy = "servicio")
+    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ImagenServicio> imagenes;
 
     // Getters y setters

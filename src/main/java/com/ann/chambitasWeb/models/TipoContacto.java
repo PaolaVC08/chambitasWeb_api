@@ -1,5 +1,7 @@
 package com.ann.chambitasWeb.models;
+
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "tipos_contacto")
 public class TipoContacto {
@@ -28,4 +30,3 @@ public class TipoContacto {
         this.nombre = nombre;
     }
 }
-

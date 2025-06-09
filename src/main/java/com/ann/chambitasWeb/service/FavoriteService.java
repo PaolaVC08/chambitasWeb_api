@@ -49,6 +49,20 @@ public class FavoriteService {
         return favoriteRepository.findByEmisorAndReceptor(emisor, receptor);
     }
 
+
+/**
+ * La función `toggleLike` en Java cambia el estado del like entre dos usuarios, ya sea agregando o
+ * eliminando una entrada de like en la base de datos y actualizando el conteo total de likes.
+ * 
+ * @param emisor El parámetro `emisor` representa al usuario que está enviando el like. En el contexto de
+ * tu método `toggleLike`, el `emisor` es el usuario que realiza la acción de dar like o quitar el like a otro usuario (`receptor`).
+ * @param receptor El parámetro `receptor` en el método `toggleLike` representa al usuario que recibe la acción del like. Este método 
+ * cambia el estado del like entre el `emisor` (quien envía el like) y el
+ * `receptor` (quien recibe el like). Si se agrega un like desde el `emisor` al
+ * @return El método `toggleLike` devuelve un mensaje indicando si se agregó o eliminó un like. Devuelve
+ * "Like agregado" si se creó un nuevo like, o "Like eliminado" si se eliminó un like existente.
+ */
+
     public String toggleLike(Usuario emisor, Usuario receptor) {
         Optional<HistorialLike> existente = favoriteRepository.findByEmisorAndReceptor(emisor, receptor);
 

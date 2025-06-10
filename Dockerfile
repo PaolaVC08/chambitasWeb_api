@@ -1,5 +1,5 @@
 # Usa una imagen base con Java 17
-FROM eclipse-temurin:17-jdk-jammy
+FROM eclipse-temurin:21-jdk-jammy
 
 # Define argumento para el archivo jar generado
 ARG JAR_FILE=target/*.jar

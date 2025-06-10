@@ -16,11 +16,11 @@ public class SignupProfesionistaRequest extends SignupRequest {
     @Size(min = 1)
     private List<MedioContactoRequest> medioContactos;
 
-    @NotNull
-    private Long profesionId;
+
 
     @NotNull
     private List<Long> profesionesIds;  // Lista de IDs de profesiones que se asignarán al profesionista
+
 
     private String horarioAtencion; // Campo para el horario de atención (opcional)
 
@@ -48,14 +48,6 @@ public class SignupProfesionistaRequest extends SignupRequest {
 
     public void setMedioContactos(List<MedioContactoRequest> medioContactos) {
         this.medioContactos = medioContactos;
-    }
-
-    public Long getProfesionId() {
-        return profesionId;
-    }
-
-    public void setProfesionId(Long profesionId) {
-        this.profesionId = profesionId;
     }
 
     public List<Long> getProfesionesIds() {

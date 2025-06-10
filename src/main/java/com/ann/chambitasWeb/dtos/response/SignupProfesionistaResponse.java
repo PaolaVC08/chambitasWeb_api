@@ -7,18 +7,18 @@ public class SignupProfesionistaResponse {
     private String correo;
     private String biografia;
     private Long zonaId;
-    private Long profesionId;
+    private Long profesionesIds;
     private Integer numeroLikes;
 
     // Constructor
     public SignupProfesionistaResponse(Long id, String nombre, String correo, String biografia, 
-                                        Long zonaId, Long profesionId, Integer numeroLikes) {
+                                        Long zonaId, Long profesionesIds, Integer numeroLikes) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this.biografia = biografia;
         this.zonaId = zonaId;
-        this.profesionId = profesionId;
+        this.profesionesIds = profesionesIds;
         this.numeroLikes = numeroLikes;
     }
 
@@ -64,19 +64,19 @@ public class SignupProfesionistaResponse {
         this.zonaId = zonaId;
     }
 
-    public Long getProfesionId() {
-        return profesionId;
-    }
-
-    public void setProfesionId(Long profesionId) {
-        this.profesionId = profesionId;
-    }
-
     public Integer getNumeroLikes() {
         return numeroLikes;
     }
 
     public void setNumeroLikes(Integer numeroLikes) {
         this.numeroLikes = numeroLikes;
+    }
+
+    public Long getProfesionesIds() {
+        return profesionesIds;
+    }
+
+    public void setProfesionesIds(Long profesionesIds) {
+        this.profesionesIds = profesionesIds;
     }
 }

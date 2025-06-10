@@ -30,9 +30,7 @@ public class Profesionista {
     @Column(name = "numero_likes")
     private Integer numeroLikes = 0;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "categoria_id", nullable = false)
-//    private Categoria categoria;
+
 
     @OneToMany(mappedBy = "profesionista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Certificado> certificados;
@@ -92,22 +90,6 @@ public class Profesionista {
 
     public void setNumeroLikes(Integer numeroLikes) {
         this.numeroLikes = numeroLikes;
-    }
-
-//    public Categoria getCategoria() {
-//        return categoria;
-//    }
-
-//    public void setCategoria(Categoria categoria) {
-//        this.categoria = categoria;
-//    }
-
-    public List<Certificado> getCertificados() {
-        return certificados;
-    }
-
-    public void setCertificados(List<Certificado> certificados) {
-        this.certificados = certificados;
     }
 
     public List<Education> getEducacion() {

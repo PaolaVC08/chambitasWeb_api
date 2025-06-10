@@ -1,5 +1,4 @@
 package com.ann.chambitasWeb.models;
-import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -11,10 +10,37 @@ public class Profesion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProfesion;
 
- //   private String nombre;
-   // private String icono;
+    @Column(nullable = false)
+    private String nombre;
 
-    @OneToMany(mappedBy = "profesion")
-    private List<ProfesionistaProfesion> profesionistas;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+
+    // Getters y setters
+    public Long getIdProfesion() {
+        return idProfesion;
+    }
+
+    public void setIdProfesion(Long idProfesion) {
+        this.idProfesion = idProfesion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }
+
 

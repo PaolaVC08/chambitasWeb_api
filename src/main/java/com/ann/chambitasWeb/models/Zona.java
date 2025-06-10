@@ -1,6 +1,6 @@
 package com.ann.chambitasWeb.models;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "zonas")
@@ -28,4 +28,3 @@ public class Zona {
         this.nombre = nombre;
     }
 }
-

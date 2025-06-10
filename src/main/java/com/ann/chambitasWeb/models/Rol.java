@@ -38,5 +38,5 @@ public class Rol {
   public void setNombre(ERole name) {
     this.nombre = name;
   }
-  
+
 }

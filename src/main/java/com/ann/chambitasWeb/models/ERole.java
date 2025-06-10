@@ -4,5 +4,4 @@ public enum ERole {
     ROLE_CLIENT,
     ROLE_PRO,
     ROLE_ADMIN
-    
 }

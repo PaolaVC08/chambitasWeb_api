@@ -12,5 +12,5 @@ public interface ServicioRepository extends JpaRepository<Servicio, Long> {
     List<Servicio> findByCategoria(Categoria categoria);
 
     // Método para obtener todos los servicios de un profesionista por su ID
-    List<Servicio> findByProfesionistaProfesionId(Long profesionistaId);
+    List<Servicio> findByProfesionistaProfesion_IdPp(Long profesionistaId);
 }

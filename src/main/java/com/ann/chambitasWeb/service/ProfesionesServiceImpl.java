@@ -35,7 +35,7 @@ public class ProfesionesServiceImpl implements IProfesionesService {
                     .map(p -> new ProfesionResponse(p.getIdProfesion(), p.getNombre()))
                     .toList();
 
-            return new CategoriaProfesionesResponse(categoria.getNombre(), profesiones);
+            return new CategoriaProfesionesResponse(categoria.getIdCategoria(),categoria.getNombre(), profesiones);
         }).toList();
     }
 

@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t ann/chambitas-web-api:latest .
+        run: docker build -t annavc/chambitas-web-api:latest .
 
       - name: Push Docker image
-        run: docker push ann/chambitas-web-api:latest
+        run: docker push annavc/chambitas-web-api:latest

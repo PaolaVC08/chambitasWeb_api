@@ -77,4 +77,9 @@ public class Servicio {
     public void setImagenes(List<ImagenServicio> imagenes) {
         this.imagenes = imagenes;
     }
+
+    public void setProfesionista(Profesionista prof) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setProfesionista'");
+    }
 }

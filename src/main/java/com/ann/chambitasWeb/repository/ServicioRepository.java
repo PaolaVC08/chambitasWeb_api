@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface ServicioRepository extends JpaRepository<Servicio, Long> {
     List<Servicio> findByCategoria(Categoria categoria);
+
+    // Método para obtener todos los servicios de un profesionista por su ID
+    List<Servicio> findByProfesionistaProfesionId(Long profesionistaId);
 }

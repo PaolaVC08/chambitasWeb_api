@@ -3,6 +3,7 @@ package com.ann.chambitasWeb.models;
 import java.util.List;
 
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "profesionistas")
 public class Profesionista {
@@ -29,9 +30,9 @@ public class Profesionista {
     @Column(name = "numero_likes")
     private Integer numeroLikes = 0;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private Categoria categoria;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "categoria_id", nullable = false)
+//    private Categoria categoria;
 
     @OneToMany(mappedBy = "profesionista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Certificado> certificados;
@@ -93,13 +94,13 @@ public class Profesionista {
         this.numeroLikes = numeroLikes;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
 
     public List<Certificado> getCertificados() {
         return certificados;
@@ -133,5 +134,4 @@ public class Profesionista {
         this.contactos = contactos;
     }
 
-    
 }

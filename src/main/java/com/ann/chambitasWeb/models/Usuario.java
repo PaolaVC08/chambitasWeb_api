@@ -11,9 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "usuarios",
-       uniqueConstraints = {
-            @UniqueConstraint(columnNames = "correo")
+@Table(name = "usuarios", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "correo")
 })
 public class Usuario {
 
@@ -42,12 +41,12 @@ public class Usuario {
     private LocalDate fechaNacimiento;
 
     @NotBlank
-    @Size(max=50)
+    @Size(max = 50)
     @Email
     private String correo;
 
     @NotBlank
-    @Size(max=120)
+    @Size(max = 120)
     private String password;
 
     @Column(name = "foto_perfil_b64")
@@ -56,34 +55,34 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private EstadoUsuario estado = EstadoUsuario.ACTIVO;
 
-     @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id_rol"))
-  private Set<Rol> roles = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id_rol"))
+//    private Set<Rol> roles = new HashSet<>();
+@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
 
-
-  public Usuario() {
-  }
-
-  
+    public Usuario() {
+    }
 
     public Usuario(String nombre, @NotBlank @Size(max = 20) String apellidoPaterno,
-        @NotBlank @Size(max = 20) String apellidoMaterno, @NotBlank @Size(max = 20) LocalDate fechaNacimiento,
-        @NotBlank @Size(max = 50) @Email String correo, @NotBlank @Size(max = 120) String password,
-        String fotoPerfilB64, EstadoUsuario estado, Set<Rol> roles) {
-    
-    this.nombre = nombre;
-    this.apellidoPaterno = apellidoPaterno;
-    this.apellidoMaterno = apellidoMaterno;
-    this.fechaNacimiento = fechaNacimiento;
-    this.correo = correo;
-    this.password = password;
-    this.fotoPerfilB64 = fotoPerfilB64;
-    this.estado = estado;
-    this.roles = roles;
-}
+            @NotBlank @Size(max = 20) String apellidoMaterno, @NotBlank @Size(max = 20) LocalDate fechaNacimiento,
+            @NotBlank @Size(max = 50) @Email String correo, @NotBlank @Size(max = 120) String password,
+            String fotoPerfilB64, EstadoUsuario estado, Set<UsuarioRol> usuarioRoles) {
 
-//GETTERS AND SETTERS
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correo = correo;
+        this.password = password;
+        this.fotoPerfilB64 = fotoPerfilB64;
+        this.estado = estado;
+        this.usuarioRoles = usuarioRoles;
+
+    }
+
+    // GETTERS AND SETTERS
     public Long getId() {
         return id;
     }
@@ -155,14 +154,22 @@ public class Usuario {
     public void setEstado(EstadoUsuario estado) {
         this.estado = estado;
     }
-    public Set<Rol> getRoles() {
-        return roles;
-      }
-    
-      public void setRoles(Set<Rol> roles) {
-        this.roles = roles;
-      }
-    
+
+    public Set<UsuarioRol> getUsuarioRoles() {
+    return usuarioRoles;
+}
+
+public void setUsuarioRoles(Set<UsuarioRol> usuarioRoles) {
+    this.usuarioRoles = usuarioRoles;
 }
 
 
+//    public Set<Rol> getRoles() {
+//        return roles;
+//    }
+
+//    public void setRoles(Set<Rol> roles) {
+//        this.roles = roles;
+//    }
+
+}

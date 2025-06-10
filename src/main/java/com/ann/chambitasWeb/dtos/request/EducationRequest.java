@@ -1,6 +1,5 @@
 package com.ann.chambitasWeb.dtos.request;
 
-<<<<<<< HEAD
 import java.time.LocalDate;
 
 public class EducationRequest {
@@ -51,8 +50,4 @@ public class EducationRequest {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-=======
-public class EducationRequest {
-    
->>>>>>> changedevelop
 }

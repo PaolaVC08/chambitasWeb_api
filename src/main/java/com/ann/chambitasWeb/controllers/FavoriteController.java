@@ -12,6 +12,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/favorites")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FavoriteController {
 
     private final FavoriteService favoriteService;

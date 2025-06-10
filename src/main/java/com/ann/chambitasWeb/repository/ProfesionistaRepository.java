@@ -24,4 +24,6 @@ public interface ProfesionistaRepository extends JpaRepository<Profesionista, Lo
     // Cambia 'id' por 'idProfesion' para que coincida con el campo correcto en la entidad 'Profesion'
     List<Profesionista> findByProfesiones_Profesion_IdProfesion(Long profesionId);
 
+    void deleteById(Long id);  // Método de eliminación por id
+
 }

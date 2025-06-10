@@ -7,17 +7,17 @@ import jakarta.persistence.*;
 public class Zona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idZona;
+    private Long id;  // Renombrado de idZona a id
 
     private String nombre;
 
     // getters y setters
-    public Long getIdZona() {
-        return idZona;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdZona(Long idZona) {
-        this.idZona = idZona;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {

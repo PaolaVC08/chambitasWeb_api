@@ -37,8 +37,7 @@ public class AuthController {
     private JwtUtils jwtUtils;
 
     private final AuthService authService;
-
-    @Autowired
+    
     public AuthController(AuthService authService) {
         this.authService = authService;
     }

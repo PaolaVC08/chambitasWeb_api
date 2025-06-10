@@ -7,6 +7,5 @@ import com.ann.chambitasWeb.models.Profesion;
 
 @Repository
 public interface ProfesionRepository extends JpaRepository<Profesion, Long> {
-    List<Profesion> findAllByCategoria_IdCategoria(Long idCategoria); // ← método personalizado
+    List<Profesion> findAllByCategoria_IdCategoria(Long idCategoria); // Consulta personalizada para obtener profesiones por categoría
 }
-

@@ -11,5 +11,6 @@ import com.ann.chambitasWeb.models.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
   Optional<Usuario> findByCorreo(String correoUsuario);
   Boolean existsByCorreo(String correo);
+   void deleteByCorreo(String correo);  // Método de eliminación por correo
   
 }

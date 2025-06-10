@@ -19,14 +19,14 @@ public class AuthService {
     private final UsuarioService usuarioService;
     private final VerificacionCorreoService verificacionCorreoService;
     private final EmailService emailService;
-    private final ProfesionistaService profesionistaService;
+    private final ProfesionistaServiceImpl profesionistaService;
 
     @Autowired
     public AuthService(
             UsuarioService usuarioService,
             VerificacionCorreoService verificacionCorreoService,
             EmailService emailService,
-            ProfesionistaService profesionistaService) {
+            ProfesionistaServiceImpl profesionistaService) {
         this.usuarioService = usuarioService;
         this.verificacionCorreoService = verificacionCorreoService;
         this.emailService = emailService;

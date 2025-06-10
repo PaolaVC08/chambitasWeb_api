@@ -102,6 +102,21 @@ public void guardarDatosProfesionista(SignupProfesionistaRequest request, Usuari
     profesionista.setHorarioAtencion(request.getHorarioAtencion() != null ? request.getHorarioAtencion() : "Horario no definido");
     profesionista.setNumeroLikes(0);
 
+    // Inicializar la lista de profesiones antes de agregar elementos
+    profesionista.setProfesiones(new ArrayList<ProfesionistaProfesion>());
+
+    // Aquí agregamos las profesiones relacionadas
+    if (request.getProfesionesIds() != null && !request.getProfesionesIds().isEmpty()) {
+        for (Long profesionId : request.getProfesionesIds()) {
+            Profesion profesion = profesionRepository.findById(profesionId)
+                    .orElseThrow(() -> new RuntimeException("Profesion no encontrada"));
+            ProfesionistaProfesion profesionistaProfesion = new ProfesionistaProfesion();
+            profesionistaProfesion.setProfesion(profesion);
+            profesionistaProfesion.setProfesionista(profesionista);
+            profesionista.getProfesiones().add(profesionistaProfesion);
+        }
+    }
+
     if (request.getMedioContactos() != null && !request.getMedioContactos().isEmpty()) {
         List<MedioContacto> contactos = new ArrayList<>();
         for (MedioContactoRequest medioContactoRequest : request.getMedioContactos()) {
@@ -117,7 +132,6 @@ public void guardarDatosProfesionista(SignupProfesionistaRequest request, Usuari
     }
 
     profesionistaRepository.save(profesionista);
-
 }
 
     @Override

@@ -3,7 +3,7 @@ package com.ann.chambitasWeb.mappers;
 import com.ann.chambitasWeb.models.Servicio;
 import com.ann.chambitasWeb.dtos.response.ServiceResponse;
 import com.ann.chambitasWeb.dtos.request.ServiceRequest;
-import com.ann.chambitasWeb.models.Categoria;
+//import com.ann.chambitasWeb.models.Categoria;
 import com.ann.chambitasWeb.models.ImagenServicio;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class ServiceMapper extends AbstractMapper<Servicio, ServiceResponse> {
         response.setIdServicio(entity.getIdServicio());
         response.setNombre(entity.getNombre());
         response.setDescripcion(entity.getDescripcion());
-        response.setCategoria(entity.getCategoria().getNombre());  // Asumimos que `Categoria` tiene un campo `nombre`
+        //response.setCategoria(entity.getCategoria().getNombre())
         
         // Convertimos las imágenes a Base64
         List<String> imagenesBase64 = entity.getImagenes().stream()
@@ -58,9 +58,9 @@ public class ServiceMapper extends AbstractMapper<Servicio, ServiceResponse> {
         servicio.setDescripcion(requestDTO.getDescripcion());
 
         // Asocia la categoría por ID
-        Categoria categoria = new Categoria();
-        categoria.setIdCategoria(requestDTO.getCategoriaId());
-        servicio.setCategoria(categoria);
+        //Categoria categoria = new Categoria();
+        //categoria.setIdCategoria(requestDTO.getCategoriaId());
+        //servicio.setCategoria(categoria);
 
         // Convertir las imágenes Base64 a entidades ImagenServicio
         List<ImagenServicio> imagenes = requestDTO.getImagenesBase64().stream()

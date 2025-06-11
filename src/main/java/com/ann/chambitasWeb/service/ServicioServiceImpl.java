@@ -3,9 +3,11 @@ package com.ann.chambitasWeb.service;
 import com.ann.chambitasWeb.dtos.request.ServiceRequest;
 import com.ann.chambitasWeb.dtos.response.ServiceResponse;
 import com.ann.chambitasWeb.mappers.ServiceMapper;
+import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.models.Servicio;
 import com.ann.chambitasWeb.repository.ServicioRepository;
 import com.ann.chambitasWeb.service.interfaces.IServiceService;
+import com.ann.chambitasWeb.service.interfaces.IUsuarioService;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -20,11 +22,14 @@ public class ServicioServiceImpl implements IServiceService {
 
     private final ServicioRepository servicioRepository;
     private final ServiceMapper serviceMapper;
+    private final IUsuarioService usuarioService;
 
     @Autowired
-    public ServicioServiceImpl(ServicioRepository servicioRepository, ServiceMapper serviceMapper) {
+    public ServicioServiceImpl(ServicioRepository servicioRepository, ServiceMapper serviceMapper,
+            IUsuarioService usuarioService) {
         this.servicioRepository = servicioRepository;
         this.serviceMapper = serviceMapper;
+        this.usuarioService = usuarioService;
     }
 
     @Override
@@ -42,11 +47,11 @@ public class ServicioServiceImpl implements IServiceService {
                 .collect(Collectors.toList());
     }
 
-        @Override
+    @Override
     public List<ServiceResponse> obtenerServiciosPorProfesionista(Long profesionistaId) {
         // Buscar todos los servicios que están asociados a un profesionista específico
         List<Servicio> servicios = servicioRepository.findByProfesionistaProfesion_IdPp(profesionistaId);
-        
+
         // Convertir las entidades a DTOs
         return servicios.stream()
                 .map(serviceMapper::toDTO)
@@ -76,4 +81,14 @@ public class ServicioServiceImpl implements IServiceService {
                 .orElseThrow(() -> new EntityNotFoundException("Servicio no encontrado"));
         servicioRepository.delete(servicio);
     }
+
+    @Override
+    public ServiceResponse crearServicioParaUsuario(String correo, ServiceRequest serviceRequest) {
+        Profesionista profesionista = usuarioService.obtenerProfesionistaPorCorreo(correo);
+        Servicio servicio = serviceMapper.toEntity(serviceRequest);
+        servicio.setProfesionistaProfesion(profesionista.getProfesiones().get(0)); // o elige uno según lógica
+        servicio = servicioRepository.save(servicio);
+        return serviceMapper.toDTO(servicio);
+    }
+
 }

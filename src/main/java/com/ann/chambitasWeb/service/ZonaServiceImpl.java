@@ -60,6 +60,7 @@ public List<ZonaResponse> agregarZonasAProfesionista(Long id, ZonaRequest zonaRe
     // Asignar la zona al profesionista
     profesionista.setZona(zona);
     profesionistaRepository.save(profesionista);
+    
 
     // Devolver la respuesta (aquí se puede agregar más información si se necesita)
     return List.of(new ZonaResponse(zona.getId(), zona.getNombre()));

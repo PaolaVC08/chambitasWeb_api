@@ -5,6 +5,7 @@ import java.net.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -28,7 +29,7 @@ import com.ann.chambitasWeb.security.services.UsuarioDetailsServiceImpl;
 public class WebSecurityConfig {
 
   @Autowired
-  UsuarioDetailsServiceImpl usuarioDetailsService; // CAMBIO: nombre adaptado a tu clase
+  UsuarioDetailsServiceImpl usuarioDetailsService;
 
   @Autowired
   private AuthEntryPointJwt unauthorizedHandler;
@@ -42,7 +43,7 @@ public class WebSecurityConfig {
   public DaoAuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 
-    authProvider.setUserDetailsService(usuarioDetailsService); // CAMBIO: tu servicio personalizado
+    authProvider.setUserDetailsService(usuarioDetailsService);
     authProvider.setPasswordEncoder(passwordEncoder());
 
     return authProvider;
@@ -58,22 +59,25 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .cors()
+        .and().csrf(csrf -> csrf.disable())
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> 
-              auth
-              .requestMatchers("/api/auth/**").permitAll()
-              .requestMatchers("/api/test/**").permitAll()
-              .requestMatchers("/api/categorias/**").permitAll()
-              .anyRequest().authenticated()
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/test/**").permitAll()
+            .requestMatchers("/api/categorias/**").permitAll()
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().authenticated()
+
         );
 
     http.authenticationProvider(authenticationProvider());
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    
+
     return http.build();
-}
+  }
 }

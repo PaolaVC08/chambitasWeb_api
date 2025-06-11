@@ -1,16 +1,19 @@
 package com.ann.chambitasWeb.dtos.response;
 
-public class ZonaResponse {
+public class ProfesionistaResponse {
     private Long id;
     private String nombre;
+    private String biografia;
 
-    // Constructor
-    public ZonaResponse(Long id, String nombre) {
+
+    public ProfesionistaResponse(Long id, String nombre, String biografia) {
         this.id = id;
         this.nombre = nombre;
+        this.biografia = biografia;
+
     }
 
-    // Getters y Setters
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -26,4 +29,13 @@ public class ZonaResponse {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
 }

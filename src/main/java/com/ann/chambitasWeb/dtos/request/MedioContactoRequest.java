@@ -1,17 +1,11 @@
 package com.ann.chambitasWeb.dtos.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 public class MedioContactoRequest {
 
-    @NotNull
-    private Long tipoContactoId;  // ID que hace referencia al tipo de contacto (WhatsApp, Email, etc.)
-
-    @NotNull
-    @Size(min = 5, message = "El valor debe ser válido")
-    private String valor;  // El valor del contacto (como número de teléfono, email, etc.)
+    private Long tipoContactoId;  // ID del tipo de contacto (WhatsApp, Email, etc.)
+    private String valor;         // El valor del contacto (número, email, etc.)
+    private Long profesionistaId; // ID del profesionista dueño del contacto
 
     // Getters y Setters
 
@@ -30,4 +24,13 @@ public class MedioContactoRequest {
     public void setValor(String valor) {
         this.valor = valor;
     }
+
+    public Long getProfesionistaId() {
+        return profesionistaId;
+    }
+
+    public void setProfesionistaId(Long profesionistaId) {
+        this.profesionistaId = profesionistaId;
+    }
+
 }

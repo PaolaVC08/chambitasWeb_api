@@ -64,7 +64,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> 
-        auth       
+              auth
               .requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
               .requestMatchers("/api/categorias/**").permitAll()

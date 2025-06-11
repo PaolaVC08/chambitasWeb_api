@@ -1,5 +1,6 @@
 package com.ann.chambitasWeb.service;
 
+
 import com.ann.chambitasWeb.dtos.request.ZonaRequest;
 import com.ann.chambitasWeb.dtos.response.ProfesionistaResponse;
 import com.ann.chambitasWeb.dtos.response.ZonaResponse;
@@ -12,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Service
 public class ZonaServiceImpl implements IZonaService {
+
 
     private final ZonaRepository zonaRepository;
     private final ProfesionistaRepository profesionistaRepository;
@@ -31,6 +35,7 @@ public class ZonaServiceImpl implements IZonaService {
     @Override
     public List<Zona> getAllZonas() {
         return zonaRepository.findAll();
+
     }
 
     @Override
@@ -65,6 +70,5 @@ public List<ZonaResponse> agregarZonasAProfesionista(Long id, ZonaRequest zonaRe
     // Devolver la respuesta (aquí se puede agregar más información si se necesita)
     return List.of(new ZonaResponse(zona.getId(), zona.getNombre()));
 }
-
 
 }

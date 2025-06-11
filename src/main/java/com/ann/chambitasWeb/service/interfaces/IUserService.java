@@ -6,5 +6,5 @@ import com.ann.chambitasWeb.dtos.request.DeleteProfesionistaRequest;
 public interface IUserService {
     void deleteUserById(Long id);  // Eliminar usuario por ID
     void deleteProfesionistaById(Long id);  // Eliminar profesionista por ID
-    void logout();  // Método para cerrar sesión
+
 }

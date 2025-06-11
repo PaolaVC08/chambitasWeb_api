@@ -1,21 +1,28 @@
 package com.ann.chambitasWeb.dtos.response;
 
 public class ProfesionResponse {
-    private Long id;
+
+    private Long idProfesion;
     private String nombre;
 
-    public ProfesionResponse(Long id, String nombre) {
-        this.id = id;
+
+
+    public ProfesionResponse(Long idProfesion, String nombre) {
+        this.idProfesion = idProfesion;
         this.nombre = nombre;
     }
 
-    // getters and setters
-    public Long getId() {
-        return id;
+    public ProfesionResponse() {
+        //TODO Auto-generated constructor stub
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // getters and setters
+    public Long getIdProfesion() {
+        return idProfesion;
+    }
+
+    public void setIdProfesion(Long idProfesion) {
+        this.idProfesion = idProfesion;
     }
 
     public String getNombre() {

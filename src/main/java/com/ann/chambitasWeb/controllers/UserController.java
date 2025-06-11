@@ -7,6 +7,7 @@ import com.ann.chambitasWeb.dtos.response.DeleteProfesionistaResponse;
 import com.ann.chambitasWeb.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -45,12 +46,9 @@ public class UserController {
 
     // Endpoint para cerrar sesión
     @PostMapping("/logout")
-    public ResponseEntity<String> logout() {
-        try {
-            userService.logout();
-            return ResponseEntity.ok("Sesión cerrada correctamente");
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body("Error al cerrar sesión: " + e.getMessage());
-        }
+    public String logout() {
+        // Limpiar el contexto de seguridad
+        SecurityContextHolder.clearContext();
+        return "Sesión cerrada correctamente";
     }
 }

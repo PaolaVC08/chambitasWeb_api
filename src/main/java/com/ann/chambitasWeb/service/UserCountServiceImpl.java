@@ -49,8 +49,4 @@ public void deleteProfesionistaById(Long id) {
     }
 }
 
-    @Override
-    public void logout() {
-        // Implementa la lógica de cierre de sesión si lo deseas.
-    }
 }

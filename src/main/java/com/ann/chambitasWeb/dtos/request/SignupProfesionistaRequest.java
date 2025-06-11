@@ -12,8 +12,8 @@ public class SignupProfesionistaRequest extends SignupRequest {
     @NotNull
     private Long zonaId;
 
-    @Size(min = 1)
-    private List<MedioContactoRequest> medioContactos;
+  //  @Size(min = 1)
+  //  private List<MedioContactoRequest> medioContactos;
 
 
 
@@ -41,13 +41,13 @@ public class SignupProfesionistaRequest extends SignupRequest {
         this.zonaId = zonaId;
     }
 
-    public List<MedioContactoRequest> getMedioContactos() {
-        return medioContactos;
-    }
+    //public List<MedioContactoRequest> getMedioContactos() {
+      //  return medioContactos;
+    //}
 
-    public void setMedioContactos(List<MedioContactoRequest> medioContactos) {
-        this.medioContactos = medioContactos;
-    }
+    //public void setMedioContactos(List<MedioContactoRequest> medioContactos) {
+      //  this.medioContactos = medioContactos;
+    //}
 
     public List<Long> getProfesionesIds() {
         return profesionesIds;

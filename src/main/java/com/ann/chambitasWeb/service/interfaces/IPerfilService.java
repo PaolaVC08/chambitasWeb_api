@@ -5,4 +5,6 @@ import com.ann.chambitasWeb.dtos.response.PerfilProfesionistaResponse;
 public interface IPerfilService {
 
     PerfilProfesionistaResponse obtenerPerfil(Long profesionistaId);
+    PerfilProfesionistaResponse obtenerPerfilPorCorreo(String correo);
+
 }

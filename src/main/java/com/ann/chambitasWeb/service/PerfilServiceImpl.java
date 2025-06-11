@@ -2,6 +2,8 @@ package com.ann.chambitasWeb.service;
 
 import com.ann.chambitasWeb.dtos.response.PerfilProfesionistaResponse;
 import com.ann.chambitasWeb.dtos.response.ServiceResponse;
+import com.ann.chambitasWeb.models.Profesionista;
+import com.ann.chambitasWeb.repository.ProfesionistaRepository;
 import com.ann.chambitasWeb.dtos.response.CertificadoResponse;
 import com.ann.chambitasWeb.dtos.response.EducationResponse;
 //import com.ann.chambitasWeb.dtos.response.ProfesionResponse;
@@ -25,48 +27,79 @@ public class PerfilServiceImpl implements IPerfilService {
     private final IServiceService servicioService;
     private final ICertificadoService certificadoService;
     private final IEducationService educacionService;
-    //private final IProfesionesService profesionService;
-    //private final IMedioContactoService medioContactoService;
-    //private final IZonaService zonaService;
+    // private final IProfesionesService profesionService;
+    // private final IMedioContactoService medioContactoService;
+    // private final IZonaService zonaService;
 
     @Autowired
     public PerfilServiceImpl(IServiceService servicioService,
-                             ICertificadoService certificadoService,
-                             IEducationService educacionService
-                             //IProfesionesService profesionService,
-                             //IMedioContactoService medioContactoService,
-                             //IZonaService zonaService
-                             ) {
+            ICertificadoService certificadoService,
+            IEducationService educacionService
+    // IProfesionesService profesionService,
+    // IMedioContactoService medioContactoService,
+    // IZonaService zonaService
+    ) {
         this.servicioService = servicioService;
         this.certificadoService = certificadoService;
         this.educacionService = educacionService;
-        //this.profesionService = profesionService;
-        //this.medioContactoService = medioContactoService;
-        //this.zonaService = zonaService;
+        // this.profesionService = profesionService;
+        // this.medioContactoService = medioContactoService;
+        // this.zonaService = zonaService;
     }
 
     @Override
     public PerfilProfesionistaResponse obtenerPerfil(Long profesionistaId) {
         // Obtener los datos de los servicios, certificados, educación y profesiones
         List<ServiceResponse> servicios = servicioService.obtenerServiciosPorProfesionista(profesionistaId);
-        List<CertificadoResponse> certificados = certificadoService.obtenerCertificadosPorProfesionista(profesionistaId);
+        List<CertificadoResponse> certificados = certificadoService
+                .obtenerCertificadosPorProfesionista(profesionistaId);
         List<EducationResponse> educaciones = educacionService.obtenerEducacionesPorProfesionista(profesionistaId);
-        //List<ProfesionResponse> profesiones = profesionService.obtenerProfesionesPorProfesionista(profesionistaId);
-        //List<MedioContactoResponse> medioContacto = medioContactoService.obtenerMediosContactoPorProfesionista(profesionistaId);
-        //List<ZonaResponse> zona = zonaService.obtenerZonasPorProfesionista(profesionistaId);
+        // List<ProfesionResponse> profesiones =
+        // profesionService.obtenerProfesionesPorProfesionista(profesionistaId);
+        // List<MedioContactoResponse> medioContacto =
+        // medioContactoService.obtenerMediosContactoPorProfesionista(profesionistaId);
+        // List<ZonaResponse> zona =
+        // zonaService.obtenerZonasPorProfesionista(profesionistaId);
 
         // Crear el PerfilProfesionistaResponse con todos los datos obtenidos
         PerfilProfesionistaResponse perfil = new PerfilProfesionistaResponse();
         perfil.setId(profesionistaId);
-        perfil.setLikes(10);  //llamar al servicio para obtener el número de likes
+        perfil.setLikes(10); // llamar al servicio para obtener el número de likes
         perfil.setServicios(servicios);
         perfil.setCertificados(certificados);
         perfil.setEducaciones(educaciones);
-        //perfil.setProfesiones(profesiones);
-        //perfil.setMediosContacto(mediosContacto);
-        //perfil.setZonas(zonas);
+        // perfil.setProfesiones(profesiones);
+        // perfil.setMediosContacto(mediosContacto);
+        // perfil.setZonas(zonas);
 
         return perfil;
     }
-}
 
+    @Autowired
+    private ProfesionistaRepository profesionistaRepository;
+
+    @Override
+    public PerfilProfesionistaResponse obtenerPerfilPorCorreo(String correo) {
+        Profesionista profesionista = profesionistaRepository.findByUsuario_Correo(correo)
+                .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
+
+        Long profesionistaId = profesionista.getId();
+
+        List<ServiceResponse> servicios = servicioService.obtenerServiciosPorProfesionista(profesionistaId);
+        List<CertificadoResponse> certificados = certificadoService
+                .obtenerCertificadosPorProfesionista(profesionistaId);
+        List<EducationResponse> educaciones = educacionService.obtenerEducacionesPorProfesionista(profesionistaId);
+
+        PerfilProfesionistaResponse perfil = new PerfilProfesionistaResponse();
+        perfil.setId(profesionistaId);
+        perfil.setNombre(profesionista.getUsuario().getNombre());
+        perfil.setLikes(profesionista.getNumeroLikes());
+        perfil.setBiografia(profesionista.getBiografia());
+        perfil.setServicios(servicios);
+        perfil.setCertificados(certificados);
+        perfil.setEducaciones(educaciones);
+
+        return perfil;
+    }
+
+}

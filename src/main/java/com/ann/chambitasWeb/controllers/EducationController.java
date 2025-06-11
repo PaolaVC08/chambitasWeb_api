@@ -39,6 +39,7 @@ public class EducationController {
     }
 
     @PostMapping
+
     public ResponseEntity<EducationResponse> crearEducacion(@RequestBody EducationRequest educationRequest) {
         String correo = SecurityContextHolder.getContext().getAuthentication().getName();
         Profesionista profesionista = usuarioService.obtenerProfesionistaPorCorreo(correo);
@@ -60,6 +61,7 @@ public class EducationController {
     }
 
     @PutMapping("/det/{id}")
+
     public ResponseEntity<EducationResponse> actualizarEducacion(@PathVariable Long id,
             @RequestBody EducationRequest educationRequestDTO) {
         EducationResponse education = educationService.actualizarEducacion(id, educationRequestDTO);

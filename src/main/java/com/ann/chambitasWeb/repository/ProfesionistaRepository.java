@@ -2,6 +2,9 @@ package com.ann.chambitasWeb.repository;
 
 import com.ann.chambitasWeb.models.Profesionista;
 
+import com.ann.chambitasWeb.models.Zona;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,5 +28,8 @@ public interface ProfesionistaRepository extends JpaRepository<Profesionista, Lo
     List<Profesionista> findByProfesiones_Profesion_IdProfesion(Long profesionId);
 
     void deleteById(Long id);  // Método de eliminación por id
+
+    List<Profesionista> findByZona(Zona zona);
+
 
 }

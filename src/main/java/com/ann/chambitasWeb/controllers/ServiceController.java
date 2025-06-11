@@ -5,7 +5,6 @@ import com.ann.chambitasWeb.dtos.response.ServiceResponse;
 import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.service.interfaces.IServiceService;
 import com.ann.chambitasWeb.service.interfaces.IUsuarioService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +21,7 @@ public class ServiceController {
 
     @Autowired
     public ServiceController(IServiceService serviceService, IUsuarioService usuarioService) {
+
         this.serviceService = serviceService;
         this.usuarioService = usuarioService;
     }

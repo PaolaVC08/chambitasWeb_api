@@ -1,16 +1,17 @@
 package com.ann.chambitasWeb.dtos.response;
 
-public class ProfesionistaResponse {
+public class ProfesionistaZonaResponse {
+
     private Long id;
     private String nombre;
+    private String correo;
     private String biografia;
 
-
-    public ProfesionistaResponse(Long id, String nombre, String biografia) {
+    public ProfesionistaZonaResponse(Long id, String nombre, String correo, String biografia) {
         this.id = id;
         this.nombre = nombre;
+        this.correo = correo;
         this.biografia = biografia;
-
     }
 
     // Getters y setters
@@ -30,6 +31,14 @@ public class ProfesionistaResponse {
         this.nombre = nombre;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getBiografia() {
         return biografia;
     }
@@ -37,5 +46,4 @@ public class ProfesionistaResponse {
     public void setBiografia(String biografia) {
         this.biografia = biografia;
     }
-
 }

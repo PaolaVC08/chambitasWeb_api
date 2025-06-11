@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ann.chambitasWeb.dtos.request.CertificadoRequest;
 import com.ann.chambitasWeb.dtos.response.CertificadoResponse;
+
 import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.service.interfaces.ICertificadoService;
 import com.ann.chambitasWeb.service.interfaces.IUsuarioService;
@@ -37,6 +38,7 @@ public class CertificadoController {
     }
 
     @GetMapping("/det/{id}")
+
     public ResponseEntity<CertificadoResponse> obtenerCertificado(@PathVariable Long id) {
         CertificadoResponse certificado = certificadoService.obtenerPorId(id);
         return ResponseEntity.ok(certificado);

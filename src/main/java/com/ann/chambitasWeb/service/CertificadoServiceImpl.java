@@ -1,7 +1,9 @@
 package com.ann.chambitasWeb.service;
 
 import java.util.List;
+
 import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ public class CertificadoServiceImpl implements ICertificadoService {
 
     private final CertificadoRepository certificadoRepository;
     private final CertificadoMapper certificadoMapper;
+
     private final ProfesionistaRepository profesionistaRepository;
 
     @Autowired

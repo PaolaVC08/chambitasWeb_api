@@ -12,7 +12,6 @@ public class SignupProfesionistaRequest extends SignupRequest {
     @NotNull
     private Long zonaId;
 
-    @NotNull
     @Size(min = 1)
     private List<MedioContactoRequest> medioContactos;
 

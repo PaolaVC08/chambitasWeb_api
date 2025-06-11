@@ -16,4 +16,8 @@ public interface IEducationService {
     EducationResponse actualizarEducacion(Long id, EducationRequest educationRequest);
 
     void eliminarEducacion(Long id);
+
+    List<EducationResponse> obtenerEducacionesPorProfesionista(Long profesionistaId);
+
+    EducationResponse crearEducacionParaProfesionista(Long id, EducationRequest educationRequest);
 }

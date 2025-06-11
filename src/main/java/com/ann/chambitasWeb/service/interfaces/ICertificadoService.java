@@ -15,4 +15,9 @@ public interface ICertificadoService {
     CertificadoResponse actualizarCertificado(Long id, CertificadoRequest certificadoRequestDTO);
 
     void eliminarCertificado(Long id);
+
+    List<CertificadoResponse> obtenerCertificadosPorProfesionista(Long profesionistaId);
+
+    CertificadoResponse crearCertificadoParaProfesionista(Long profesionistaId, CertificadoRequest request);
+
 }

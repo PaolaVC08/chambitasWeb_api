@@ -4,6 +4,7 @@ import com.ann.chambitasWeb.models.Zona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,4 +16,6 @@ public interface ZonaRepository extends JpaRepository<Zona, Long> {
 
     // Método para obtener todas las zonas
     List<Zona> findAll();
+    boolean existsByNombre(String nombre);
+
 }

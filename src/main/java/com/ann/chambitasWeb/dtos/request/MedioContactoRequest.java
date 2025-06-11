@@ -1,5 +1,6 @@
 package com.ann.chambitasWeb.dtos.request;
 
+
 public class MedioContactoRequest {
 
     private Long tipoContactoId;  // ID del tipo de contacto (WhatsApp, Email, etc.)
@@ -7,6 +8,7 @@ public class MedioContactoRequest {
     private Long profesionistaId; // ID del profesionista dueño del contacto
 
     // Getters y Setters
+
     public Long getTipoContactoId() {
         return tipoContactoId;
     }
@@ -30,4 +32,5 @@ public class MedioContactoRequest {
     public void setProfesionistaId(Long profesionistaId) {
         this.profesionistaId = profesionistaId;
     }
+
 }

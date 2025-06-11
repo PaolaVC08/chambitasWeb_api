@@ -1,5 +1,6 @@
 package com.ann.chambitasWeb.service.interfaces;
 
+
 import com.ann.chambitasWeb.dtos.request.ZonaRequest;
 import com.ann.chambitasWeb.dtos.response.ProfesionistaResponse;
 import com.ann.chambitasWeb.dtos.response.ZonaResponse;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public interface IZonaService {
 
+
     // Obtener todas las zonas
     List<Zona> getAllZonas();
 
@@ -21,4 +23,5 @@ public interface IZonaService {
 
     // Asignar una zona a un profesionista
     List<ZonaResponse> agregarZonasAProfesionista(Long id, ZonaRequest zonaRequest);
+
 }

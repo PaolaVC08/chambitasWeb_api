@@ -24,4 +24,7 @@ public interface IServiceService {
 
     // Método para eliminar un servicio
     void eliminarServicio(Long id);
+
+    ServiceResponse crearServicioParaUsuario(String correo, ServiceRequest serviceRequest);
+
 }

@@ -7,7 +7,7 @@ public class ServiceRequest {
     private Long profesionistaProfesionId;  
     private String nombre;                 
     private String descripcion;           
-    private Long categoriaId;              
+    //private Long categoriaId;              
     private List<String> imagenesBase64;  
 
     // Getters y Setters
@@ -35,13 +35,13 @@ public class ServiceRequest {
         this.descripcion = descripcion;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
-    }
+    //public Long getCategoriaId() {
+    //    return categoriaId;
+    //}
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
-    }
+    //public void setCategoriaId(Long categoriaId) {
+    //    this.categoriaId = categoriaId;
+    //}
 
     public List<String> getImagenesBase64() {
         return imagenesBase64;

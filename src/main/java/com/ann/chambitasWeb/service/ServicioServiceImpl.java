@@ -42,6 +42,17 @@ public class ServicioServiceImpl implements IServiceService {
                 .collect(Collectors.toList());
     }
 
+        @Override
+    public List<ServiceResponse> obtenerServiciosPorProfesionista(Long profesionistaId) {
+        // Buscar todos los servicios que están asociados a un profesionista específico
+        List<Servicio> servicios = servicioRepository.findByProfesionistaProfesion_IdPp(profesionistaId);
+        
+        // Convertir las entidades a DTOs
+        return servicios.stream()
+                .map(serviceMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public ServiceResponse crearServicio(ServiceRequest serviceRequest) {
         Servicio servicio = serviceMapper.toEntity(serviceRequest);

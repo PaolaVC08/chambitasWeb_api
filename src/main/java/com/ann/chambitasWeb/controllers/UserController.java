@@ -1,11 +1,11 @@
 package com.ann.chambitasWeb.controllers;
 
-import com.ann.chambitasWeb.dtos.request.DeleteUserRequest;
-import com.ann.chambitasWeb.dtos.request.DeleteProfesionistaRequest;
+
+
 import com.ann.chambitasWeb.dtos.response.DeleteUserResponse;
 import com.ann.chambitasWeb.dtos.response.DeleteProfesionistaResponse;
 import com.ann.chambitasWeb.service.interfaces.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,8 @@ public class UserController {
 
     private final IUserService userService;
 
-    @Autowired
+
+
     public UserController(IUserService userService) {
         this.userService = userService;
     }

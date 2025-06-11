@@ -1,15 +1,18 @@
 package com.ann.chambitasWeb.service;
 
-//import com.ann.chambitasWeb.dtos.request.SignupProfesionistaRequest;
+
 import com.ann.chambitasWeb.dtos.request.SignupRequest;
 import com.ann.chambitasWeb.models.Usuario;
 import com.ann.chambitasWeb.models.UsuarioRol;
 import com.ann.chambitasWeb.models.ERole;
 import com.ann.chambitasWeb.models.EstadoUsuario;
+import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.models.Rol;
+import com.ann.chambitasWeb.repository.ProfesionistaRepository;
 import com.ann.chambitasWeb.repository.RoleRepository;
 import com.ann.chambitasWeb.repository.UsuarioRepository;
 import com.ann.chambitasWeb.utils.RolMapper;
+import com.ann.chambitasWeb.service.interfaces.IUsuarioService;
 
 import java.util.Set;
 
@@ -18,23 +21,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements IUsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final ProfesionistaRepository profesionistaRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsuarioService(UsuarioRepository usuarioRepository, RoleRepository roleRepository,
+    public UsuarioService(UsuarioRepository usuarioRepository,ProfesionistaRepository profesionistaRepository, RoleRepository roleRepository,
+
             PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.profesionistaRepository = profesionistaRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
     }
 
-    /**
-     * Verifica si ya existe un correo en la base de datos.
-     */
+    @Override
     public boolean existeCorreo(String correo) {
         return usuarioRepository.existsByCorreo(correo);
     }
@@ -54,6 +58,7 @@ public class UsuarioService {
      */
 
     // Crea un nuevo usuario en estado INACTIVO y guarda en la BD.
+
     public Usuario crearUsuarioInactivo(SignupRequest request) {
         Usuario usuario = new Usuario();
         usuario.setNombre(request.getNombre());
@@ -64,11 +69,11 @@ public class UsuarioService {
         usuario.setPassword(passwordEncoder.encode(request.getPassword()));
         usuario.setEstado(EstadoUsuario.INACTIVO);
 
-        // Convertir tipoUsuario a ERole y asignar el rol
         ERole rolEnum = RolMapper.fromTipoUsuario(request.getTipoUsuario());
         Rol rol = roleRepository.findByNombre(rolEnum)
                 .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado"));
-        // usuario.setRoles(Set.of(rol));
+
+
         UsuarioRol usuarioRol = new UsuarioRol(usuario, rol);
         usuario.setUsuarioRoles(Set.of(usuarioRol));
         return usuarioRepository.save(usuario);
@@ -87,10 +92,23 @@ public class UsuarioService {
      *                      address, sets the user's state to `ACTIVO`
      *                      (active),
      */
+
     public void activarUsuario(String correoUsuario) {
         Usuario usuario = usuarioRepository.findByCorreo(correoUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         usuario.setEstado(EstadoUsuario.ACTIVO);
         usuarioRepository.save(usuario);
     }
+
+    @Override
+    public Usuario obtenerPorCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+    @Override
+    public Profesionista obtenerProfesionistaPorCorreo(String correo) {
+    return profesionistaRepository.findByUsuario_Correo(correo)
+        .orElseThrow(() -> new RuntimeException("Profesionista no encontrado para el usuario con correo: " + correo));
+}
+
 }

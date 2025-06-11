@@ -15,9 +15,13 @@ import com.ann.chambitasWeb.repository.ProfesionistaRepository;
 import com.ann.chambitasWeb.repository.ZonaRepository;
 import com.ann.chambitasWeb.service.interfaces.IZonaService;
 
+
+
+
 @Service
 @Transactional
 public class ZonaServiceImpl implements IZonaService {
+
 
     private final ZonaRepository zonaRepository;
     private final ProfesionistaRepository profesionistaRepository;
@@ -34,6 +38,7 @@ public class ZonaServiceImpl implements IZonaService {
     @Override
     public List<Zona> getAllZonas() {
         return zonaRepository.findAll();
+
     }
 
     @Override

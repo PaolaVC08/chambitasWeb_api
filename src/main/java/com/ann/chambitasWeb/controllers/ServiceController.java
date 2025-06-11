@@ -3,7 +3,6 @@ package com.ann.chambitasWeb.controllers;
 import com.ann.chambitasWeb.dtos.request.ServiceRequest;
 import com.ann.chambitasWeb.dtos.response.ServiceResponse;
 import com.ann.chambitasWeb.service.interfaces.IServiceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +14,7 @@ public class ServiceController {
 
     private final IServiceService serviceService;
 
-    @Autowired
+ 
     public ServiceController(IServiceService serviceService) {
         this.serviceService = serviceService;
     }

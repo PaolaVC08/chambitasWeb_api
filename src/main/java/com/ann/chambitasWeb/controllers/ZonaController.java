@@ -4,14 +4,11 @@ import com.ann.chambitasWeb.dtos.request.ZonaRequest;
 import com.ann.chambitasWeb.dtos.response.ProfesionistaResponse;
 import com.ann.chambitasWeb.dtos.response.ZonaResponse;
 import com.ann.chambitasWeb.models.Profesionista;
-import com.ann.chambitasWeb.models.Zona;
 import com.ann.chambitasWeb.service.interfaces.IZonaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,7 +18,6 @@ public class ZonaController {
 
     private final IZonaService zonaService;
 
-    @Autowired
     public ZonaController(IZonaService zonaService) {
         this.zonaService = zonaService;
     }

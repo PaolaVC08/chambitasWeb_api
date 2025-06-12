@@ -62,4 +62,16 @@ public class ZonaServiceImpl implements IZonaService {
 
         return zonaMapper.toDTOList(zonaRepository.findAll());
     }
+
+@Override
+public List<ZonaResponse> obtenerZonaDeProfesionista(Long profesionistaId) {
+    Profesionista profesionista = profesionistaRepository.findById(profesionistaId)
+        .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
+
+    Zona zona = profesionista.getZona();
+    return List.of(zonaMapper.toDTO(zona));
+}
+
+
+    
 }

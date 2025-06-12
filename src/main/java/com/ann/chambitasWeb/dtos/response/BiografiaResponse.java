@@ -2,23 +2,26 @@ package com.ann.chambitasWeb.dtos.response;
 
 public class BiografiaResponse {
 
-    private Long idBiografia;
+    //private Long idBiografia;
     private String biografia;
+    private Long profesionistaId;
 
 
     
-    public Long getIdBiografia() {
-        return idBiografia;
-    }
-    public void setIdBiografia(Long idBiografia) {
-        this.idBiografia = idBiografia;
-    }
+
     public String getBiografia() {
         return biografia;
     }
     public void setBiografia(String biografia) {
         this.biografia = biografia;
     }
+    public Long getProfesionistaId() {
+        return profesionistaId;
+    }
+    public void setProfesionistaId(Long profesionistaId) {
+        this.profesionistaId = profesionistaId;
+    }
+
 
 
     

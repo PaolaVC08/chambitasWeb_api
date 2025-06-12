@@ -1,21 +1,9 @@
 package com.ann.chambitasWeb.service;
 
-import com.ann.chambitasWeb.dtos.response.PerfilProfesionistaResponse;
-import com.ann.chambitasWeb.dtos.response.ServiceResponse;
+import com.ann.chambitasWeb.dtos.response.*;
 import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.repository.ProfesionistaRepository;
-import com.ann.chambitasWeb.dtos.response.CertificadoResponse;
-import com.ann.chambitasWeb.dtos.response.EducationResponse;
-//import com.ann.chambitasWeb.dtos.response.ProfesionResponse;
-//import com.ann.chambitasWeb.dtos.response.MedioContactoResponse;
-//import com.ann.chambitasWeb.dtos.response.ZonaResponse;
-import com.ann.chambitasWeb.service.interfaces.IPerfilService;
-import com.ann.chambitasWeb.service.interfaces.IServiceService;
-import com.ann.chambitasWeb.service.interfaces.ICertificadoService;
-import com.ann.chambitasWeb.service.interfaces.IEducationService;
-//import com.ann.chambitasWeb.service.interfaces.IProfesionesService;
-//import com.ann.chambitasWeb.service.interfaces.IMedioContactoService;
-//import com.ann.chambitasWeb.service.interfaces.IZonaService;
+import com.ann.chambitasWeb.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,56 +15,62 @@ public class PerfilServiceImpl implements IPerfilService {
     private final IServiceService servicioService;
     private final ICertificadoService certificadoService;
     private final IEducationService educacionService;
-    // private final IProfesionesService profesionService;
-    // private final IMedioContactoService medioContactoService;
-    // private final IZonaService zonaService;
+    private final IProfesionesService profesionService;
+    private final IMedioContactoService medioContactoService;
+    private final IZonaService zonaService;
+    private final IBiografiaService biografiaService;
 
     @Autowired
-    public PerfilServiceImpl(IServiceService servicioService,
-            ICertificadoService certificadoService,
-            IEducationService educacionService
-    // IProfesionesService profesionService,
-    // IMedioContactoService medioContactoService,
-    // IZonaService zonaService
+    public PerfilServiceImpl(
+        IServiceService servicioService,
+        ICertificadoService certificadoService,
+        IEducationService educacionService,
+        IProfesionesService profesionService,
+        IMedioContactoService medioContactoService,
+        IZonaService zonaService,
+        IBiografiaService biografiaService
     ) {
         this.servicioService = servicioService;
         this.certificadoService = certificadoService;
         this.educacionService = educacionService;
-        // this.profesionService = profesionService;
-        // this.medioContactoService = medioContactoService;
-        // this.zonaService = zonaService;
-    }
-
-    @Override
-    public PerfilProfesionistaResponse obtenerPerfil(Long profesionistaId) {
-        // Obtener los datos de los servicios, certificados, educación y profesiones
-        List<ServiceResponse> servicios = servicioService.obtenerServiciosPorProfesionista(profesionistaId);
-        List<CertificadoResponse> certificados = certificadoService
-                .obtenerCertificadosPorProfesionista(profesionistaId);
-        List<EducationResponse> educaciones = educacionService.obtenerEducacionesPorProfesionista(profesionistaId);
-        // List<ProfesionResponse> profesiones =
-        // profesionService.obtenerProfesionesPorProfesionista(profesionistaId);
-        // List<MedioContactoResponse> medioContacto =
-        // medioContactoService.obtenerMediosContactoPorProfesionista(profesionistaId);
-        // List<ZonaResponse> zona =
-        // zonaService.obtenerZonasPorProfesionista(profesionistaId);
-
-        // Crear el PerfilProfesionistaResponse con todos los datos obtenidos
-        PerfilProfesionistaResponse perfil = new PerfilProfesionistaResponse();
-        perfil.setId(profesionistaId);
-        perfil.setLikes(10); // llamar al servicio para obtener el número de likes
-        perfil.setServicios(servicios);
-        perfil.setCertificados(certificados);
-        perfil.setEducaciones(educaciones);
-        // perfil.setProfesiones(profesiones);
-        // perfil.setMediosContacto(mediosContacto);
-        // perfil.setZonas(zonas);
-
-        return perfil;
+        this.profesionService = profesionService;
+        this.medioContactoService = medioContactoService;
+        this.zonaService = zonaService;
+        this.biografiaService = biografiaService;
     }
 
     @Autowired
     private ProfesionistaRepository profesionistaRepository;
+    
+
+@Override
+public PerfilProfesionistaResponse obtenerPerfil(Long profesionistaId) {
+    Profesionista profesionista = profesionistaRepository.findById(profesionistaId)
+            .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
+
+ List<ServiceResponse> servicios = servicioService.obtenerServiciosPorProfesionista(profesionistaId);
+    List<CertificadoResponse> certificados = certificadoService.obtenerCertificadosPorProfesionista(profesionistaId);
+    List<EducationResponse> educaciones = educacionService.obtenerEducacionesPorProfesionista(profesionistaId);
+    List<ProfesionistaProfesionResponse> relaciones = profesionService.obtenerProfesionesPorProfesionista(profesionistaId); // <- nuevo
+    List<MedioContactoResponse> medioContacto = medioContactoService.obtenerMedioContactoPorProfesionista(profesionistaId);
+    List<BiografiaResponse> biografia = biografiaService.obtenerBiografiaPorProfesionista(profesionistaId);
+    List<ZonaResponse> zonas = zonaService.obtenerZonaDeProfesionista(profesionistaId);
+
+    PerfilProfesionistaResponse perfil = new PerfilProfesionistaResponse();
+    perfil.setId(profesionistaId);
+    perfil.setNombre(profesionista.getUsuario().getNombre());
+    perfil.setBiografia(profesionista.getBiografia());
+    perfil.setZonas(zonas);
+    perfil.setLikes(profesionista.getNumeroLikes());
+    perfil.setServicios(servicios);
+    perfil.setCertificados(certificados);
+    perfil.setEducaciones(educaciones);
+    perfil.setProfesionistaProfesiones(relaciones); // <--- esto es lo nuevo
+    perfil.setMedioContactoResponses(medioContacto);
+    perfil.setBiografiaResponses(biografia);
+
+    return perfil;
+}
 
     @Override
     public PerfilProfesionistaResponse obtenerPerfilPorCorreo(String correo) {
@@ -85,21 +79,28 @@ public class PerfilServiceImpl implements IPerfilService {
 
         Long profesionistaId = profesionista.getId();
 
-        List<ServiceResponse> servicios = servicioService.obtenerServiciosPorProfesionista(profesionistaId);
-        List<CertificadoResponse> certificados = certificadoService
-                .obtenerCertificadosPorProfesionista(profesionistaId);
-        List<EducationResponse> educaciones = educacionService.obtenerEducacionesPorProfesionista(profesionistaId);
-
+ List<ServiceResponse> servicios = servicioService.obtenerServiciosPorProfesionista(profesionistaId);
+    List<CertificadoResponse> certificados = certificadoService.obtenerCertificadosPorProfesionista(profesionistaId);
+    List<EducationResponse> educaciones = educacionService.obtenerEducacionesPorProfesionista(profesionistaId);
+    List<ProfesionistaProfesionResponse> relaciones = profesionService.obtenerProfesionesPorProfesionista(profesionistaId); // <- nuevo
+    List<MedioContactoResponse> medioContacto = medioContactoService.obtenerMedioContactoPorProfesionista(profesionistaId);
+    List<BiografiaResponse> biografia = biografiaService.obtenerBiografiaPorProfesionista(profesionistaId);
+     List<ZonaResponse> zonas = zonaService.obtenerZonaDeProfesionista(profesionistaId);
+        // List<ZonaResponse> zonas = List.of(zonaService.obtenerZonaPorId(profesionista.getZona().getId()));
+   
         PerfilProfesionistaResponse perfil = new PerfilProfesionistaResponse();
         perfil.setId(profesionistaId);
         perfil.setNombre(profesionista.getUsuario().getNombre());
-        perfil.setLikes(profesionista.getNumeroLikes());
         perfil.setBiografia(profesionista.getBiografia());
+        perfil.setLikes(profesionista.getNumeroLikes());
         perfil.setServicios(servicios);
         perfil.setCertificados(certificados);
         perfil.setEducaciones(educaciones);
+        perfil.setProfesionistaProfesiones(relaciones); // <--- esto es lo nuevo
+        perfil.setMedioContactoResponses(medioContacto);
+        perfil.setBiografiaResponses(biografia);
+        perfil.setZonas(zonas);
 
         return perfil;
     }
-
 }

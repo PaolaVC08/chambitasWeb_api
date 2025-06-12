@@ -40,7 +40,6 @@ public class ZonaController {
     }
 
     // GET: una zona por ID
-    // GET: una zona por ID
     @GetMapping("/{id}")
     public ResponseEntity<ZonaResponse> obtenerZonaPorId(@PathVariable Long id) {
         Optional<Zona> zonaOptional = zonaService.getZonaById(id);

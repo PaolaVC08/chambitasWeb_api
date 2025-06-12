@@ -8,7 +8,9 @@ import java.util.List;
 public interface IBiografiaService {
 
 
-    // Método para crear una biografia
+    //Método para ver biografia
+    List<BiografiaResponse> obtenerBiografiaPorProfesionista(Long profesionistaId);
+        // Método para crear una biografia
     BiografiaResponse crearBiografia(BiografiaRequest biografiaRequest);
 
     // Método para actualizar biografía

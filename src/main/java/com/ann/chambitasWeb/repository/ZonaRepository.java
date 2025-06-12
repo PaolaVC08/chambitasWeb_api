@@ -16,6 +16,9 @@ public interface ZonaRepository extends JpaRepository<Zona, Long> {
 
     // Método para obtener todas las zonas
     List<Zona> findAll();
+
     boolean existsByNombre(String nombre);
+
+    
 
 }

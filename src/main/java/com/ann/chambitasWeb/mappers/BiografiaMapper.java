@@ -11,7 +11,7 @@ public class BiografiaMapper {
 
     public BiografiaResponse toDTO(Profesionista entity) {
         BiografiaResponse response = new BiografiaResponse();
-        response.setIdBiografia(entity.getId());
+       // response.setIdBiografia(entity.getId());
         response.setBiografia(entity.getBiografia());
         return response;
     }

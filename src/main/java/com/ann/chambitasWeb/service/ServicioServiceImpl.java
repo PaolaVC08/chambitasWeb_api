@@ -50,7 +50,7 @@ public class ServicioServiceImpl implements IServiceService {
     @Override
     public List<ServiceResponse> obtenerServiciosPorProfesionista(Long profesionistaId) {
         // Buscar todos los servicios que están asociados a un profesionista específico
-        List<Servicio> servicios = servicioRepository.findByProfesionistaProfesion_IdPp(profesionistaId);
+        List<Servicio> servicios = servicioRepository.findByProfesionistaProfesion_Profesionista_Id(profesionistaId);
 
         // Convertir las entidades a DTOs
         return servicios.stream()

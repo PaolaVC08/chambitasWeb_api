@@ -1,5 +1,9 @@
 package com.ann.chambitasWeb.service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,5 +52,24 @@ public class BiografiaImpl implements IBiografiaService {
             .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
         prof.setBiografia(null);
         profesionistaRepository.save(prof);
+    }
+
+    @Override
+    public List<BiografiaResponse> obtenerBiografiaPorProfesionista(Long profesionistaId) {
+        Optional<Profesionista> optional = profesionistaRepository.findById(profesionistaId);
+        if (optional.isEmpty()) {
+            throw new RuntimeException("Profesionista no encontrado");
+        }
+
+        Profesionista prof = optional.get();
+        if (prof.getBiografia() == null || prof.getBiografia().isBlank()) {
+            return Collections.emptyList();
+        }
+
+        BiografiaResponse respuesta = new BiografiaResponse();
+        respuesta.setProfesionistaId(prof.getId());
+        respuesta.setBiografia(prof.getBiografia());
+
+        return List.of(respuesta);
     }
 }

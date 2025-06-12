@@ -24,4 +24,10 @@ public interface IZonaService {
     // Asignar una zona a un profesionista
     List<ZonaResponse> agregarZonasAProfesionista(Long id, ZonaRequest zonaRequest);
 
+        //Método para obtener la zona del profesionista.
+    List<ZonaResponse> obtenerZonaDeProfesionista(Long profesionistaId); 
+    
+
+
+
 }

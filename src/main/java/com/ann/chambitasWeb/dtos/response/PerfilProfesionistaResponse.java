@@ -8,16 +8,42 @@ public class PerfilProfesionistaResponse {
     private String nombre;
     private String biografia;
     private int likes;
-    // private List<MediosContactoResponse> mediosDeContacto;
-    // private List<ZonaResponse> zonas;
-    private List<ProfesionResponse> profesiones;
+    private List<BiografiaResponse> biografiaResponses;
+    private List<MedioContactoResponse> medioContactoResponses;
+    private List<ZonaResponse> zonas;
     private List<EducationResponse> educaciones;
     private List<CertificadoResponse> certificados;
     private List<ServiceResponse> servicios;
+    private List<ProfesionistaProfesionResponse> profesionistaProfesiones;
+// con su setter
 
-    // GETTERS AND SETTERS
+    // GETTERS AND SETTERS    
     public Long getId() {
         return id;
+    }
+
+    public List<BiografiaResponse> getBiografiaResponses() {
+        return biografiaResponses;
+    }
+
+    public void setBiografiaResponses(List<BiografiaResponse> biografiaResponses) {
+        this.biografiaResponses = biografiaResponses;
+    }
+
+    public List<MedioContactoResponse> getMedioContactoResponses() {
+        return medioContactoResponses;
+    }
+
+    public void setMedioContactoResponses(List<MedioContactoResponse> medioContactoResponses) {
+        this.medioContactoResponses = medioContactoResponses;
+    }
+
+    public List<ZonaResponse> getZonas() {
+        return zonas;
+    }
+
+    public void setZonas(List<ZonaResponse> zonas) {
+        this.zonas = zonas;
     }
 
     public void setId(Long id) {
@@ -72,12 +98,14 @@ public class PerfilProfesionistaResponse {
         this.servicios = servicios;
     }
 
-    public List<ProfesionResponse> getProfesiones() {
-        return profesiones;
+    public List<ProfesionistaProfesionResponse> getProfesionistaProfesiones() {
+        return profesionistaProfesiones;
     }
 
-    public void setProfesiones(List<ProfesionResponse> profesiones) {
-        this.profesiones = profesiones;
+    public void setProfesionistaProfesiones(List<ProfesionistaProfesionResponse> profesionistaProfesiones) {
+        this.profesionistaProfesiones = profesionistaProfesiones;
     }
+
+    
 
 }

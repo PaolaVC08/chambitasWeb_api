@@ -2,8 +2,10 @@ package com.ann.chambitasWeb.service;
 
 import java.util.Set;
 
+import com.ann.chambitasWeb.dtos.request.BiografiaRequest;
 import com.ann.chambitasWeb.dtos.request.MedioContactoRequest;
 import com.ann.chambitasWeb.dtos.request.SignupProfesionistaRequest;
+import com.ann.chambitasWeb.dtos.response.BiografiaResponse;
 import com.ann.chambitasWeb.dtos.response.SignupProfesionistaResponse;
 import com.ann.chambitasWeb.models.ERole;
 import com.ann.chambitasWeb.models.EstadoUsuario;
@@ -155,5 +157,11 @@ public void guardarDatosProfesionista(SignupProfesionistaRequest request, Usuari
     @Override
     public List<Profesionista> obtenerProfesionalesPorProfesion(Long profesionId) {
         return profesionistaRepository.findByProfesiones_Profesion_IdProfesion(profesionId);
+    }
+
+    @Override
+    public BiografiaResponse crearBiografia(BiografiaRequest request, Long idProfesionista) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'crearBiografia'");
     }
 }

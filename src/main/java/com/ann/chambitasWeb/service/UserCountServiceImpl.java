@@ -1,6 +1,8 @@
 package com.ann.chambitasWeb.service;
 
 import com.ann.chambitasWeb.dtos.request.DeleteUserRequest;
+import com.ann.chambitasWeb.dtos.response.BiografiaResponse;
+import com.ann.chambitasWeb.dtos.request.BiografiaRequest;
 import com.ann.chambitasWeb.dtos.request.DeleteProfesionistaRequest;
 import com.ann.chambitasWeb.repository.ProfesionistaRepository;
 import com.ann.chambitasWeb.repository.UsuarioRepository;

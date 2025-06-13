@@ -1,6 +1,8 @@
 package com.ann.chambitasWeb.service.interfaces;
 
+import com.ann.chambitasWeb.dtos.request.BiografiaRequest;
 import com.ann.chambitasWeb.dtos.request.SignupProfesionistaRequest;
+import com.ann.chambitasWeb.dtos.response.BiografiaResponse;
 import com.ann.chambitasWeb.dtos.response.SignupProfesionistaResponse;
 import com.ann.chambitasWeb.dtos.response.ZonaResponse;
 import com.ann.chambitasWeb.models.Profesionista;
@@ -29,5 +31,8 @@ public interface IProfesionistaService {
 
     // Método para obtener todos los profesionistas por profesión
     List<Profesionista> obtenerProfesionalesPorProfesion(Long profesionId);
+
+     // Crear biografia obteniendo el id de profesionista
+    BiografiaResponse crearBiografia(BiografiaRequest request, Long idProfesionista);
 }
 

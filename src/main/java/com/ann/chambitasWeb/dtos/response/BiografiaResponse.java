@@ -18,9 +18,5 @@ public class BiografiaResponse {
     public void setProfesionistaId(Long profesionistaId) {
         this.profesionistaId = profesionistaId;
     }
-
-
-
-    
     
 }

@@ -25,25 +25,31 @@ public class BiografiaImpl implements IBiografiaService {
         this.biografiaMapper = biografiaMapper;
     }
 
-    @Override
-    @Transactional
-    public BiografiaResponse crearBiografia(BiografiaRequest biografiaRequest) {
-        Profesionista prof = profesionistaRepository.findById(biografiaRequest.getProfesionistaId())
-            .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
-        prof.setBiografia(biografiaRequest.getBiografia());
-        Profesionista actualizado = profesionistaRepository.save(prof);
-        return biografiaMapper.toDTO(actualizado);
-    }
+@Override
+@Transactional
+public BiografiaResponse crearBiografia(BiografiaRequest biografiaRequest, Long profesionistaId) {
+    Profesionista prof = profesionistaRepository.findById(profesionistaId)
+        .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
+    
+    prof.setBiografia(biografiaRequest.getBiografia());
+    Profesionista actualizado = profesionistaRepository.save(prof);
 
-    @Override
-    @Transactional
-    public BiografiaResponse actualizarBiografia(Long id, BiografiaRequest biografiaRequest) {
-        Profesionista prof = profesionistaRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
-        prof.setBiografia(biografiaRequest.getBiografia());
-        Profesionista actualizado = profesionistaRepository.save(prof);
-        return biografiaMapper.toDTO(actualizado);
-    }
+    BiografiaResponse response = new BiografiaResponse();
+    response.setBiografia(actualizado.getBiografia());
+    response.setProfesionistaId(actualizado.getId()); // <- aquí se asigna correctamente el ID
+
+    return response;
+}
+
+@Override
+@Transactional
+public BiografiaResponse actualizarBiografia(BiografiaRequest biografiaRequest, Long profesionistaId) {
+    Profesionista prof = profesionistaRepository.findById(profesionistaId)
+        .orElseThrow(() -> new RuntimeException("Profesionista no encontrado"));
+    prof.setBiografia(biografiaRequest.getBiografia());
+    Profesionista actualizado = profesionistaRepository.save(prof);
+    return biografiaMapper.toDTO(actualizado);
+}
 
     @Override
     @Transactional

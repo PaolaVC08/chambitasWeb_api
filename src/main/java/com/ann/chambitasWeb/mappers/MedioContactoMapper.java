@@ -62,7 +62,7 @@ public class MedioContactoMapper extends AbstractMapper<MedioContacto, MedioCont
         contacto.setTipo(tipo);
 
         Profesionista profesionista = new Profesionista();
-        profesionista.setId(requestDTO.getProfesionistaId());
+      //  profesionista.setId(requestDTO.getProfesionistaId());
         contacto.setProfesionista(profesionista);
 
         return contacto;

@@ -9,6 +9,7 @@ public class ZonaRequest {
     public ZonaRequest(String nombre) {
         this.nombre = nombre;
     }
+    
 
     // Getter y Setter para id
     public Long getId() {

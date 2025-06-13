@@ -13,7 +13,7 @@ public interface IUsuarioService {
     void activarUsuario(String correoUsuario);
 
     Usuario obtenerPorCorreo(String correo);
-
-    Profesionista obtenerProfesionistaPorCorreo(String correo);
+    
+      Profesionista obtenerProfesionistaPorCorreo(String correo);
 }
 

@@ -15,8 +15,6 @@ public class SignupProfesionistaRequest extends SignupRequest {
     @Size(min = 1)
     private List<MedioContactoRequest> medioContactos;
 
-
-
     @NotNull
     private List<Long> profesionesIds;  // Lista de IDs de profesiones que se asignarán al profesionista
 

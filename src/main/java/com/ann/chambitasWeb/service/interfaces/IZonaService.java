@@ -2,7 +2,6 @@ package com.ann.chambitasWeb.service.interfaces;
 
 
 import com.ann.chambitasWeb.dtos.request.ZonaRequest;
-import com.ann.chambitasWeb.dtos.response.ProfesionistaResponse;
 import com.ann.chambitasWeb.dtos.response.ZonaResponse;
 import com.ann.chambitasWeb.models.Profesionista;
 import com.ann.chambitasWeb.models.Zona;

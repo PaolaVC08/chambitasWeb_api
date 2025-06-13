@@ -5,10 +5,7 @@ public class BiografiaResponse {
     //private Long idBiografia;
     private String biografia;
     private Long profesionistaId;
-
-
     
-
     public String getBiografia() {
         return biografia;
     }

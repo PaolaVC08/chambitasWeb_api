@@ -2,9 +2,11 @@ package com.ann.chambitasWeb.controllers;
 
 import com.ann.chambitasWeb.dtos.response.CategoriaProfesionesResponse;
 import com.ann.chambitasWeb.dtos.response.ProfesionResponse;
+import com.ann.chambitasWeb.dtos.response.ProfesionistaProfesionResponse;
 import com.ann.chambitasWeb.service.interfaces.IProfesionesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,5 +33,11 @@ public class ProfesionesController {
     @GetMapping("/{id}")
     public List<ProfesionResponse> obtenerProfesionesPorCategoria(@PathVariable Long id) {
         return profesionesService.obtenerPorCategoria(id);
+    }
+
+    @GetMapping("/profesionistas-por-profesion/{id}")
+    public ResponseEntity<List<ProfesionistaProfesionResponse>> obtenerPorProfesion(@PathVariable Long id) {
+        List<ProfesionistaProfesionResponse> lista = profesionesService.obtenerProfesionistaPorProfesion(id);
+        return ResponseEntity.ok(lista);
     }
 }

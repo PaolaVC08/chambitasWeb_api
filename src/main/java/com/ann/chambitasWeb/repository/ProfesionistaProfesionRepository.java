@@ -9,5 +9,8 @@ import java.util.List;
 @Repository
 public interface ProfesionistaProfesionRepository extends JpaRepository<ProfesionistaProfesion, Long> {
 
-    List<ProfesionistaProfesion> findByProfesionista_Id(Long profesionistaId);
+  List<ProfesionistaProfesion> findByProfesionista_Id(Long profesionistaId);
+
+   // List<ProfesionistaProfesion> findByProfesionista_IdProfesionista(Long profesionistaId);
+    List<ProfesionistaProfesion> findByProfesion_IdProfesion(Long profesionId);
 }

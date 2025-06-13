@@ -14,5 +14,7 @@ public interface IProfesionesService {
     List<ProfesionResponse> obtenerPorCategoria(Long idCategoria);
 
     List<ProfesionistaProfesionResponse> obtenerProfesionesPorProfesionista(Long profesionistaId);
+
+    List<ProfesionistaProfesionResponse> obtenerProfesionistaPorProfesion(Long profesionId);
 }
 

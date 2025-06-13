@@ -68,4 +68,12 @@ public List<ProfesionistaProfesionResponse> obtenerProfesionesPorProfesionista(L
                      .map(profesionistaProfesionMapper::toDTO)
                      .toList();
 }
+
+@Override
+public List<ProfesionistaProfesionResponse> obtenerProfesionistaPorProfesion(Long profesionId) {
+    List<ProfesionistaProfesion> relaciones = profesionistaProfesionRepository.findByProfesion_IdProfesion(profesionId);
+    return relaciones.stream()
+                     .map(profesionistaProfesionMapper::toDTO)
+                     .toList();
+}
 }

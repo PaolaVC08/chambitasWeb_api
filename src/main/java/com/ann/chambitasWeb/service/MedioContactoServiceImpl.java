@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 import com.ann.chambitasWeb.mappers.MedioContactoMapper;
 import com.ann.chambitasWeb.models.MedioContacto;
+import com.ann.chambitasWeb.models.Zona;
 import com.ann.chambitasWeb.repository.MedioContactoRepository;
 import com.ann.chambitasWeb.service.interfaces.IMedioContactoService;
 
@@ -43,12 +44,12 @@ public void eliminarMedioContacto(Long id) {
     medioContactoRepository.deleteById(id);
 }
 
-    @Override
-    public MedioContactoResponse crearMedioContactoParaProfesionista(Long id, MedioContactoRequest request) {
-        request.setProfesionistaId(id);
-        MedioContacto contacto = medioContactoMapper.toEntity(request);
-        return medioContactoMapper.toDTO(medioContactoRepository.save(contacto));
-    }
+//    @Override
+//    public MedioContactoResponse crearMedioContactoParaProfesionista(Long id, MedioContactoRequest request) {
+//        request.setProfesionistaId(id);
+//        MedioContacto contacto = medioContactoMapper.toEntity(request);
+//        return medioContactoMapper.toDTO(medioContactoRepository.save(contacto));
+//    }
 
     @Override
     public MedioContactoResponse actualizarMedioContacto(Long id, MedioContactoRequest request) {
@@ -63,4 +64,16 @@ public void eliminarMedioContacto(Long id) {
 
         return medioContactoMapper.toDTO(medioContactoRepository.save(contactoExistente));
     }
+
+    @Override
+    public List<MedioContacto> getAllMedioContacto() {
+    return medioContactoRepository.findAll();
+    }
+
+    @Override
+public Optional<MedioContacto> getMedioContactoById(Long id) {
+    return medioContactoRepository.findById(id);
+}
+
+
 }

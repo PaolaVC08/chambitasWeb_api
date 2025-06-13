@@ -117,7 +117,7 @@ public void guardarDatosProfesionista(SignupProfesionistaRequest request, Usuari
         }
     }
 
-    if (request.getMedioContactos() != null && !request.getMedioContactos().isEmpty()) {
+ /*    if (request.getMedioContactos() != null && !request.getMedioContactos().isEmpty()) {
         List<MedioContacto> contactos = new ArrayList<>();
         for (MedioContactoRequest medioContactoRequest : request.getMedioContactos()) {
             MedioContacto medioContacto = new MedioContacto();
@@ -129,7 +129,7 @@ public void guardarDatosProfesionista(SignupProfesionistaRequest request, Usuari
             contactos.add(medioContacto);
         }
         profesionista.setContactos(contactos);
-    }
+    }*/
 
     profesionistaRepository.save(profesionista);
 }

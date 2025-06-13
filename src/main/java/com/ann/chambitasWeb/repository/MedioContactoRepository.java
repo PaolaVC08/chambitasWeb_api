@@ -13,5 +13,7 @@ public interface MedioContactoRepository extends JpaRepository<MedioContacto, Lo
 //    List<MedioContacto> FindBy
 
   List<MedioContacto> findByProfesionista_Id(Long profesionistaId);
+  
+  List<MedioContacto> findAll();
     
 }

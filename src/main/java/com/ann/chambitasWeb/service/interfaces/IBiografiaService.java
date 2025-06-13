@@ -7,16 +7,15 @@ import java.util.List;
 
 public interface IBiografiaService {
 
-
-    //Método para ver biografia
+    // Obtener biografía de un profesionista (puede haber solo una por profesionista)
     List<BiografiaResponse> obtenerBiografiaPorProfesionista(Long profesionistaId);
-        // Método para crear una biografia
-    BiografiaResponse crearBiografia(BiografiaRequest biografiaRequest);
 
-    // Método para actualizar biografía
-    BiografiaResponse actualizarBiografia(Long id, BiografiaRequest biografiaRequest );
+    // Crear biografía para un profesionista autenticado
+    BiografiaResponse crearBiografia(BiografiaRequest biografiaRequest, Long profesionistaId);
 
-    // Método para eliminar biografía
-    void eliminarBiografia(Long id); 
+    // Actualizar biografía para un profesionista autenticado
+    BiografiaResponse actualizarBiografia(BiografiaRequest biografiaRequest, Long profesionistaId);
 
+    // Eliminar biografía para un profesionista autenticado
+    void eliminarBiografia(Long profesionistaId);
 }

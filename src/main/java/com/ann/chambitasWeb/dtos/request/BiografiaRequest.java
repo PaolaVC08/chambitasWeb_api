@@ -17,8 +17,5 @@ public class BiografiaRequest {
     }
     public void setBiografia(String biografia) {
         this.biografia = biografia;
-    }
-
-    
-    
+    } 
 }

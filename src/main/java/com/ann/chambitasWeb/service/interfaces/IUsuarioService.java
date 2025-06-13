@@ -14,6 +14,6 @@ public interface IUsuarioService {
 
     Usuario obtenerPorCorreo(String correo);
     
-      Profesionista obtenerProfesionistaPorCorreo(String correo);
+    Profesionista obtenerProfesionistaPorCorreo(String correo);
 }
 

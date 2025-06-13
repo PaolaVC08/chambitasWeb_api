@@ -4,20 +4,20 @@ import java.util.List;
 
 public class ServiceRequest {
 
-    private Long profesionistaProfesionId;  
+    //private Long profesionistaProfesionId;  
     private String nombre;                 
     private String descripcion;           
     //private Long categoriaId;              
     private List<String> imagenesBase64;  
 
     // Getters y Setters
-    public Long getProfesionistaProfesionId() {
-        return profesionistaProfesionId;
-    }
+    //public Long getProfesionistaProfesionId() {
+      //  return profesionistaProfesionId;
+    //}
 
-    public void setProfesionistaProfesionId(Long profesionistaProfesionId) {
-        this.profesionistaProfesionId = profesionistaProfesionId;
-    }
+    //public void setProfesionistaProfesionId(Long profesionistaProfesionId) {
+      //  this.profesionistaProfesionId = profesionistaProfesionId;
+    //}
 
     public String getNombre() {
         return nombre;
